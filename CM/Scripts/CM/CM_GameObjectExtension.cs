@@ -22,5 +22,24 @@ namespace CM
 
 			return closestTarget;
 		}
+
+		public static GameObject FindFurthestGameObjectWithTag(this GameObject gameObject, string tag)
+		{
+			GameObject[] targetObjects = GameObject.FindGameObjectsWithTag(tag);
+
+			float furthestDistance = -1;
+			GameObject furthestTarget = null;
+			foreach (GameObject target in targetObjects)
+			{
+				float distance = Vector3.Distance(target.transform.position, gameObject.transform.position);
+				if (distance > furthestDistance || furthestDistance == -1)
+				{
+					furthestDistance = distance;
+					furthestTarget = target;
+				}
+			}
+
+			return furthestTarget;
+		}
 	}
 }

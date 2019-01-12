@@ -317,8 +317,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 04d1efb4f90182b459efdab98b3bdd1c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 20
+  targetType: Tag
+  rangeType: Furthest
   targetTag: Enemy
+  targetLayer:
+    serializedVersion: 2
+    m_Bits: 512
+  targetTransform: {fileID: 0}
+  speed: 20
 --- !u!114 &4123636477895764327
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -332,5 +338,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   nextStateName: MoveAwayState
-  range: 3
+  range: 1
   targetTag: Enemy
