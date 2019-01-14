@@ -7,6 +7,9 @@ namespace CM.Spawner
 	{
 		public GameObject objectToSpawn;
 
+		public delegate void SpawnHandler();
+		public event SpawnHandler spawnEvent;
+
 		public void Spawn(float angle)
 		{
 			Spawning();
@@ -28,6 +31,9 @@ namespace CM.Spawner
 			GameObject spawningObject = Instantiate(objectToSpawn);
 			spawningObject.transform.position = transform.position;
 			spawningObject.transform.rotation = transform.rotation;
+
+			if (spawnEvent != null)
+				spawnEvent();
 		}
 	}
 }
