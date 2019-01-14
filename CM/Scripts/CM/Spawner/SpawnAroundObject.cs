@@ -14,11 +14,6 @@ namespace CM.Spawner
 		private void Start()
 		{
 			targetPosition = new Vector2(target.position.x, target.position.y);
-
-			Spawn(0, 5);
-			Spawn(90, 5);
-			Spawn(180, 5);
-			Spawn(270, 5);
 		}
 
 		public void Spawn(float angle, float radius)
@@ -26,12 +21,12 @@ namespace CM.Spawner
 			Spawning(angle, radius);
 		}
 
-		public void Spawn(float angle, float radius, int seconds)
+		public void Spawn(float angle, float radius, float seconds)
 		{
 			StartCoroutine(SpawnRoutine(angle, radius, seconds));
 		}
 
-		private IEnumerator SpawnRoutine(float angle, float radius, int seconds)
+		private IEnumerator SpawnRoutine(float angle, float radius, float seconds)
 		{
 			yield return new WaitForSeconds(seconds);
 			Spawning(angle, radius);

@@ -22,7 +22,7 @@ namespace CM.Essentials
 			color.a -= reduceValue;
 			spriteRenderer.color = color;
 
-			if (color.a <= 0)
+			if (color.a <= 0 && fadeFinishEvent != null)
 				fadeFinishEvent();
 		}
 	}
