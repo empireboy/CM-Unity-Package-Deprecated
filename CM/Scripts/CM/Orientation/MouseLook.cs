@@ -13,7 +13,10 @@ namespace CM.Movement
 		private Vector2 _currentSensitivity;
 		private Vector2 _sensitivityMultiplier = new Vector2(1, 1);
 		[Header("Mouse Y Properties")]
+		public bool clamp = true;
+		[ShowIf("clamp")]
 		public float clampYMin = -70;
+		[ShowIf("clamp")]
 		public float clampYMax = 70;
 		public bool invertY = false;
 		[Header("Mouse X Properties")]
@@ -44,7 +47,10 @@ namespace CM.Movement
 			rotation.x += (axes.x * (_currentSensitivity.x * _sensitivityMultiplier.x)) * invert.x;
 			rotation.y += (axes.y * (_currentSensitivity.y * _sensitivityMultiplier.y)) * invert.y;
 
-			rotation.y = Mathf.Clamp(rotation.y, clampYMin, clampYMax);
+			if (clamp)
+			{
+				rotation.y = Mathf.Clamp(rotation.y, clampYMin, clampYMax);
+			}
 
 			switch (rotationAxes)
 			{
