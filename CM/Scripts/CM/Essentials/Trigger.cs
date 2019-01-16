@@ -7,12 +7,11 @@ namespace CM.Essentials
 	public class Trigger : MonoBehaviour
 	{
 		public delegate void TriggerHandler();
-		public event TriggerHandler triggerEvent;
+		public event TriggerHandler TriggerEvent;
 
 		private void OnTriggerEnter2D(Collider2D collision)
 		{
-			if (triggerEvent != null)
-				triggerEvent();
+			TriggerEvent?.Invoke();
 		}
 	}
 }
