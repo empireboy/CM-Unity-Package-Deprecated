@@ -4,9 +4,8 @@ namespace CM.Music
 {
 	public class RhythmController : MonoBehaviour
 	{
-		[SerializeField]
-		private MusicLevel _level;
-		public MusicLevel Level { get => _level; }
+		private IMusicLevel _level;
+		public IMusicLevel Level { get => _level; }
 
 		public delegate void BeatHandler(int beat);
 		public event BeatHandler BeatEvent;
@@ -17,22 +16,34 @@ namespace CM.Music
 		private float _secondsPerBeat;
 		public float SecondsPerBeat { get => _secondsPerBeat; }
 
-		private void Awake()
-		{
-			_secondsPerBeat = 60f / _level.bpm;
-			Camera.main.orthographicSize = _level.cameraSize;
-		}
-
-		private void Start()
-		{
-			InvokeRepeating("NextBeat", 0, _secondsPerBeat * 0.25f);
-		}
-
 		private void NextBeat()
 		{
 			BeatEvent?.Invoke(_currentBeat);
 
 			_currentBeat++;
+		}
+
+		public void SetMusicLevel(IMusicLevel musicLevel)
+		{
+			_level = musicLevel;
+			_secondsPerBeat = 60f / _level.GetBpm();
+		}
+
+		public void StartLevel()
+		{
+			if (_level == null)
+			{
+				Debug.LogWarning("Can't start music level because there is no music level assigned");
+				return;
+			}
+
+			if (IsInvoking("NextBeat"))
+			{
+				Debug.LogWarning("This music level has already been started");
+				return;
+			}
+
+			InvokeRepeating("NextBeat", 0, _secondsPerBeat * 0.25f);
 		}
 	}
 }
