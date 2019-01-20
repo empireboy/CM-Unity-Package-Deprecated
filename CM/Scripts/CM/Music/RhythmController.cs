@@ -27,6 +27,7 @@ namespace CM.Music
 		{
 			_level = musicLevel;
 			_secondsPerBeat = 60f / _level.GetBpm();
+			StartLevel();
 		}
 
 		public void StartLevel()
