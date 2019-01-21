@@ -27,7 +27,7 @@ namespace CM.Music
 		{
 			_level = musicLevel;
 			_secondsPerBeat = 60f / _level.GetBpm();
-			StartLevel();
+			//StartLevel();
 		}
 
 		public void StartLevel()
@@ -45,6 +45,23 @@ namespace CM.Music
 			}
 
 			InvokeRepeating("NextBeat", 0, _secondsPerBeat * 0.25f);
+		}
+
+		public void StopLevel()
+		{
+			if (_level == null)
+			{
+				Debug.LogWarning("Can't stop music level because there is no music level assigned");
+				return;
+			}
+
+			if (!IsInvoking("NextBeat"))
+			{
+				Debug.LogWarning("Can't stop because this music level has not been started");
+				return;
+			}
+
+			CancelInvoke("NextBeat");
 		}
 	}
 }
