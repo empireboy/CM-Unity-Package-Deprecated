@@ -14,15 +14,19 @@ namespace CM.Music
 			if (Input.GetButtonDown("MusicLevelEditor Next"))
 			{
 				_currentIndex = Mathf.Max(0, _currentIndex + 1);
-				ChangeIndexEvent?.Invoke(_currentIndex);
+				UpdateIndex();
 			}
 
 			if (Input.GetButtonDown("MusicLevelEditor Previous"))
 			{
 				_currentIndex = Mathf.Max(0, _currentIndex - 1);
-				ChangeIndexEvent?.Invoke(_currentIndex);
+				UpdateIndex();
 			}
-			Debug.Log(_currentIndex);
+		}
+
+		public void UpdateIndex()
+		{
+			ChangeIndexEvent?.Invoke(_currentIndex);
 		}
 	}
 }
