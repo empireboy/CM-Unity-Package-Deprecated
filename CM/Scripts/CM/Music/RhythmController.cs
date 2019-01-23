@@ -18,6 +18,7 @@ namespace CM.Music
 
 		private void NextBeat()
 		{
+			Debug.Log(_currentBeat);
 			BeatEvent?.Invoke(_currentBeat);
 
 			_currentBeat++;
@@ -44,6 +45,24 @@ namespace CM.Music
 				return;
 			}
 
+			InvokeRepeating("NextBeat", 0, _secondsPerBeat * 0.25f);
+		}
+
+		public void StartLevelAt(int beat)
+		{
+			if (_level == null)
+			{
+				Debug.LogWarning("Can't start music level because there is no music level assigned");
+				return;
+			}
+
+			if (IsInvoking("NextBeat"))
+			{
+				Debug.LogWarning("This music level has already been started");
+				return;
+			}
+
+			_currentBeat = beat;
 			InvokeRepeating("NextBeat", 0, _secondsPerBeat * 0.25f);
 		}
 

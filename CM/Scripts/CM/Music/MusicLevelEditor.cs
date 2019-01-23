@@ -9,15 +9,20 @@ namespace CM.Music
 		public delegate void ChangeIndexHandler(int index);
 		public event ChangeIndexHandler ChangeIndexEvent;
 
+		public bool isPlaying = false;
+
 		private void Update()
 		{
-			if (Input.GetButtonDown("MusicLevelEditor Next"))
+			if (isPlaying)
+				return;
+
+			if (Input.GetAxis("Mouse ScrollWheel") < 0)
 			{
 				_currentIndex = Mathf.Max(0, _currentIndex + 1);
 				UpdateIndex();
 			}
 
-			if (Input.GetButtonDown("MusicLevelEditor Previous"))
+			if (Input.GetAxis("Mouse ScrollWheel") > 0)
 			{
 				_currentIndex = Mathf.Max(0, _currentIndex - 1);
 				UpdateIndex();
