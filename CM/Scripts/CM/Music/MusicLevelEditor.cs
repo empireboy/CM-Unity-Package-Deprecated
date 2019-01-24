@@ -9,13 +9,8 @@ namespace CM.Music
 		public delegate void ChangeIndexHandler(int index);
 		public event ChangeIndexHandler ChangeIndexEvent;
 
-		public bool isPlaying = false;
-
 		private void Update()
 		{
-			if (isPlaying)
-				return;
-
 			if (Input.GetAxis("Mouse ScrollWheel") < 0)
 			{
 				_currentIndex = Mathf.Max(0, _currentIndex + 1);
