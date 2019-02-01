@@ -5,21 +5,25 @@ namespace CM.Music
 {
 	public class AudioPlayer : MonoBehaviour
 	{
-		public AudioSource audioSource;
+		private AudioSource _audioSource;
+		public AudioSource AudioSource { get => _audioSource; }
 
-		public bool IsPlaying { get => audioSource.isPlaying; }
+		public bool IsPlaying { get => AudioSource.isPlaying; }
+
+		public delegate void AudioInitializedHandler(AudioSource audioSource);
+		public event AudioInitializedHandler AudioInitializedEvent;
 
 		public void Play()
 		{
 			Stop();
-			audioSource.Play();
+			AudioSource.Play();
 			StopAllCoroutines();
 		}
 
 		public void PlayAudioAt(float audioTime, float time)
 		{
 			Stop();
-			audioSource.time = audioTime;
+			AudioSource.time = audioTime;
 			Play();
 			StartCoroutine(PlayAudioAtRoutine(time));
 		}
@@ -27,26 +31,28 @@ namespace CM.Music
 		public void PlayAudioAt(float audioTime)
 		{
 			Stop();
-			audioSource.time = audioTime;
+			AudioSource.time = audioTime;
 			Play();
 			StopAllCoroutines();
 		}
 
 		public void Stop()
 		{
-			audioSource.Stop();
+			AudioSource.Stop();
 			StopAllCoroutines();
 		}
 
 		public void SetAudio(AudioData audioData)
 		{
-			if (!audioSource)
-				audioSource = gameObject.AddComponent<AudioSource>();
+			if (!AudioSource)
+				_audioSource = gameObject.AddComponent<AudioSource>();
 
-			audioSource.clip = audioData.clip;
-			audioSource.volume = audioData.volume;
-			audioSource.pitch = audioData.pitch;
-			audioSource.playOnAwake = audioData.playOnAwake;
+			AudioSource.clip = audioData.clip;
+			AudioSource.volume = audioData.volume;
+			AudioSource.pitch = audioData.pitch;
+			AudioSource.playOnAwake = audioData.playOnAwake;
+
+			AudioInitializedEvent?.Invoke(AudioSource);
 		}
 
 		private IEnumerator PlayAudioAtRoutine(float time)
@@ -54,13 +60,5 @@ namespace CM.Music
 			yield return new WaitForSeconds(time);
 			Stop();
 		}
-	}
-
-	public struct AudioData
-	{
-		public AudioClip clip;
-		public float volume;
-		public float pitch;
-		public bool playOnAwake;
 	}
 }
