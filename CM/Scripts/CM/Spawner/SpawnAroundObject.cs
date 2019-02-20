@@ -1,21 +1,21 @@
-﻿using System.Collections;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace CM.Spawner
 {
-	public class SpawnAroundObject : MonoBehaviour
+	public static class SpawnAroundObject
 	{
-		public Transform Spawn(Transform from, GameObject objectToSpawn, float angle, float radius)
+		public static Transform Spawn(Transform from, GameObject objectToSpawn, float angle, float radius)
 		{
 			return Spawning(from, objectToSpawn, angle, radius);
 		}
 
-		public Transform Spawn(GameObject objectToSpawn, float angle, float radius)
+		public static Transform Spawn(GameObject objectToSpawn, float angle, float radius)
 		{
 			return Spawning(objectToSpawn, angle, radius);
 		}
 
-		public void Spawn(Transform from, GameObject objectToSpawn, float angle, float radius, float seconds)
+		/*
+		public static void Spawn(Transform from, GameObject objectToSpawn, float angle, float radius, float seconds)
 		{
 			StartCoroutine(SpawnRoutine(from, objectToSpawn, angle, radius, seconds));
 		}
@@ -25,8 +25,9 @@ namespace CM.Spawner
 			yield return new WaitForSeconds(seconds);
 			Spawning(from, objectToSpawn, angle, radius);
 		}
+		*/
 
-		private Transform Spawning(Transform from, GameObject objectToSpawn, float angle, float radius)
+		private static Transform Spawning(Transform from, GameObject objectToSpawn, float angle, float radius)
 		{
 			Vector2 offset = (Vector2)(Quaternion.Euler(0, 0, angle) * Vector2.right) * radius;
 
@@ -37,7 +38,7 @@ namespace CM.Spawner
 			return spawningObject.transform;
 		}
 
-		private Transform Spawning(GameObject objectToSpawn, float angle, float radius)
+		private static Transform Spawning(GameObject objectToSpawn, float angle, float radius)
 		{
 			Vector2 offset = (Vector2)(Quaternion.Euler(0, 0, angle) * Vector2.right) * radius;
 

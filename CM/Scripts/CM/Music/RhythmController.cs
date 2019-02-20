@@ -4,8 +4,8 @@ namespace CM.Music
 {
 	public class RhythmController : MonoBehaviour
 	{
-		private IMusicLevel _level;
-		public IMusicLevel Level { get => _level; }
+		private IRhythmLevel _level;
+		public IRhythmLevel Level { get => _level; }
 
 		public delegate void BeatHandler(int beat);
 		public event BeatHandler BeatEvent;
@@ -26,7 +26,7 @@ namespace CM.Music
 			_currentBeat++;
 		}
 
-		public void SetMusicLevel(IMusicLevel musicLevel)
+		public void SetMusicLevel(IRhythmLevel musicLevel)
 		{
 			_level = musicLevel;
 			_secondsPerBeat = 60f / _level.Bpm;

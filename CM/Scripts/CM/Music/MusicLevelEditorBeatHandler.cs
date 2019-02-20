@@ -2,19 +2,19 @@
 
 namespace CM.Music
 {
-	public abstract class RhythmControllerBeatHandler : MonoBehaviour
+	public abstract class MusicLevelEditorBeatHandler : MonoBehaviour
 	{
-		protected RhythmController rhythmController;
+		protected MusicLevelEditor musicLevelEditor;
 
 		private void Awake()
 		{
-			rhythmController = FindObjectOfType<RhythmController>();
+			musicLevelEditor = FindObjectOfType<MusicLevelEditor>();
 			OnAwake();
 		}
 
 		private void Start()
 		{
-			rhythmController.BeatEvent += OnBeat;
+			musicLevelEditor.ChangeIndexEvent += OnChangeIndex;
 			OnStart();
 		}
 
@@ -30,10 +30,10 @@ namespace CM.Music
 
 		private void ReleaseBeatEvent()
 		{
-			rhythmController.BeatEvent -= OnBeat;
+			musicLevelEditor.ChangeIndexEvent -= OnChangeIndex;
 		}
 
-		protected abstract void OnBeat(int currentBeat);
+		protected abstract void OnChangeIndex(int currentIndex);
 		protected virtual void OnAwake() { }
 		protected virtual void OnStart() { }
 	}
