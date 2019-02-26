@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using CM.Essentials;
 
 namespace CM.Shooter
 {
@@ -21,7 +22,11 @@ namespace CM.Shooter
 
 			if (Physics.Raycast(_shootPoint.position, _shootPoint.transform.forward, out hit, _shootRange))
 			{
-				Destroy(hit.transform.gameObject);
+				IDamageable damageable = hit.transform.gameObject.GetComponent<IDamageable>();
+
+				if (damageable != null)
+					damageable.TakeDamage(1);
+
 				if (OnRaycastHit != null)
 					OnRaycastHit(hit);
 			}

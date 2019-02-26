@@ -8,17 +8,17 @@ namespace CM.Essentials.FSM
 		[Header("Types")]
 
 		[Dropdown("_targetTypes")]
-		public string targetType = "Tag";
+		public string targetType;
 
 		[ShowIf("ShowRangeTypes")]
 		[Dropdown("_rangeTypes")]
-		public string rangeType = "Closest";
+		public string rangeType;
 
 		private string[] _targetTypes = new string[] { "Tag", "Layer", "Transform" };
 		private string[] _rangeTypes = new string[] { "Closest", "Furthest" };
 
 		[ShowIf("TypeIsTag")]
-		public string targetTag = "Enemy";
+		public string targetTag;
 
 		[ShowIf("TypeIsLayer")]
 		public LayerMask targetLayer;
@@ -63,11 +63,17 @@ namespace CM.Essentials.FSM
 						break;*/
 				}
 			}
+
+			if (TypeIsTransform())
+			{
+				_target = targetTransform;
+			}
 		}
 
 		public override void ActionUpdate()
 		{
-			transform.root.position = Vector3.MoveTowards(transform.root.position, _target.position, speed * Time.deltaTime);
+			if (_target != null)
+				transform.root.position = Vector3.MoveTowards(transform.root.position, _target.position, speed * Time.deltaTime);
 		}
 
 		private bool ShowRangeTypes()

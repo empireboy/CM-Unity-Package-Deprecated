@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
 namespace CM
 {
@@ -41,5 +42,27 @@ namespace CM
 
 			return furthestTarget;
 		}
+
+		/*public static GameObject FindClosestGameObjectWithLayerMask(this GameObject gameObject, LayerMask layerMask)
+		{
+			GameObject[] gameObjects = Object.FindObjectsOfType<GameObject>();
+			List<GameObject> targetObjects = new List<GameObject>();
+			
+			for (i)
+
+			float furthestDistance = -1;
+			GameObject furthestTarget = null;
+			foreach (GameObject target in targetObjects)
+			{
+				float distance = Vector3.Distance(target.transform.position, gameObject.transform.position);
+				if (distance > furthestDistance || furthestDistance == -1)
+				{
+					furthestDistance = distance;
+					furthestTarget = target;
+				}
+			}
+
+			return furthestTarget;
+		}*/
 	}
 }
