@@ -5,6 +5,5 @@
 		int Bpm { get; }
 		int BeatsBeforeLevelStarts { get; }
 		AudioData AudioData { get; }
-		string[] PerBeatTypes { get; }
 	}
 }
