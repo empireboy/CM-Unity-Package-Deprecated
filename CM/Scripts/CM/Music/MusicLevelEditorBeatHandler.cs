@@ -18,11 +18,6 @@ namespace CM.Music
 			OnStart();
 		}
 
-		private void OnDestroy()
-		{
-			ReleaseBeatEvent();
-		}
-
 		protected void Release()
 		{
 			ReleaseBeatEvent();
