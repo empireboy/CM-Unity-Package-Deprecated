@@ -20,7 +20,6 @@ namespace CM.Music
 
 		[SerializeField]
 		private List<T> _beats = new List<T>();
-		public List<T> Beats { get => _beats; }
 
 		private string[] _perBeatTypes;
 		public string[] PerBeatTypes { get => _perBeatTypes; }
