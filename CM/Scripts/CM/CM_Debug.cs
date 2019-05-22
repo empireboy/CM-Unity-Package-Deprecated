@@ -12,7 +12,7 @@ namespace CM
 			// Add category if it doesn't exist
 			if (!categories.ContainsKey(category))
 			{
-				categories.Add(category, false);
+				categories.Add(category, true);
 			}
 
 			// Return if the current category is set to false

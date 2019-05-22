@@ -5,6 +5,7 @@ namespace CM.Music
 	public class MusicLevelEditor : MonoBehaviour
 	{
 		private int _currentIndex = 0;
+		public int CurrentIndex { get => _currentIndex; }
 		private int _indexIncreaseValue = 1;
 
 		public delegate void ChangeIndexHandler(int index);
@@ -16,20 +17,20 @@ namespace CM.Music
 
 			if (Input.GetAxis("Mouse ScrollWheel") < 0)
 			{
-				_currentIndex = Mathf.Max(0, _currentIndex + _indexIncreaseValue);
+				_currentIndex = Mathf.Max(0, CurrentIndex + _indexIncreaseValue);
 				UpdateIndex();
 			}
 
 			if (Input.GetAxis("Mouse ScrollWheel") > 0)
 			{
-				_currentIndex = Mathf.Max(0, _currentIndex - _indexIncreaseValue);
+				_currentIndex = Mathf.Max(0, CurrentIndex - _indexIncreaseValue);
 				UpdateIndex();
 			}
 		}
 
 		public void UpdateIndex()
 		{
-			ChangeIndexEvent?.Invoke(_currentIndex);
+			ChangeIndexEvent?.Invoke(CurrentIndex);
 		}
 
 		public void UpdateIndex(int index)
