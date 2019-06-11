@@ -1,4 +1,4 @@
-﻿namespace CM
+﻿namespace CM.Orientation
 {
 	public enum Direction
 	{
