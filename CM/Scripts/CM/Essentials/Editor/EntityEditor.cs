@@ -9,8 +9,6 @@ public class EntityEditor : Editor
 	{
 		base.OnInspectorGUI();
 
-		Debug.Log("test");
-
 		Entity entity = (Entity)target;
 
 		if (GUILayout.Button("Create Modules"))
