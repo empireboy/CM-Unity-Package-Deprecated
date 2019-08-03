@@ -16,9 +16,24 @@ namespace CM.Essentials
 
 		private void Awake()
 		{
+			OnAwake();
+		}
+
+		private void Start()
+		{
+			OnStart();
+		}
+
+		protected virtual void OnAwake()
+		{
 			// Get Modules, check if the module parent exists
 			if (GetParentModuleObject())
 				InitializeModules();
+		}
+
+		protected virtual void OnStart()
+		{
+			// This can be overridden
 		}
 
 		public void CreateModules()
@@ -40,16 +55,20 @@ namespace CM.Essentials
 				GameObject moduleObject = new GameObject();
 				moduleObject.transform.parent = moduleParent.transform;
 				moduleObject.name = _moduleInterfaces[i].ToString().Remove(0, 1) + _moduleSuffix;
+				CM_Debug.Log("CM Entity", "Created Module object " + moduleObject.name);
 			}
 		}
 
-		private void InitializeModules()
+		public void InitializeModules()
 		{
+			CM_Debug.Log("CM Entity", "Initializing Modules");
 			_moduleInterfaces = this.GetType().GetInterfaces();
 		}
 
 		public GameObject GetModuleObject<T>()
 		{
+			CM_Debug.Log("CM Entity", "Getting Module object of " + typeof(T).ToString());
+
 			GameObject parentModule = GetParentModuleObject();
 
 			Transform[] children = parentModule.GetComponentsInChildren<Transform>();
@@ -66,6 +85,8 @@ namespace CM.Essentials
 
 		public GameObject GetModuleObject(Type moduleInterface)
 		{
+			CM_Debug.Log("CM Entity", "Getting Module object of " + moduleInterface.ToString());
+
 			GameObject parentModule = GetParentModuleObject();
 
 			Transform[] children = parentModule.GetComponentsInChildren<Transform>();
@@ -96,6 +117,8 @@ namespace CM.Essentials
 
 		public T[] GetModules<T>()
 		{
+			CM_Debug.Log("CM Entity", "Getting Modules of " + typeof(T).ToString());
+
 			GameObject moduleObject = GetModuleObject<T>();
 			T[] modules = moduleObject.GetComponents<T>();
 
@@ -104,6 +127,8 @@ namespace CM.Essentials
 
 		public Component[] GetModules(Type moduleInterface)
 		{
+			CM_Debug.Log("CM Entity", "Getting Modules of " + moduleInterface.ToString());
+
 			GameObject moduleObject = GetModuleObject(moduleInterface);
 			Component[] modules = moduleObject.GetComponents(moduleInterface);
 

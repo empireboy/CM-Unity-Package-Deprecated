@@ -10,8 +10,9 @@ namespace CM
 		public static void Log(string category, object message)
 		{
 			// Add category if it doesn't exist
-			if (!categories.ContainsKey(category))
+			if (!CategoryExists(category))
 			{
+				Debug.Log(message);
 				categories.Add(category, true);
 			}
 
@@ -24,7 +25,31 @@ namespace CM
 
 		public static void AddCategory(string category, bool value)
 		{
+			// Check if the category already exists
+			if (CategoryExists(category))
+			{
+				Debug.LogWarning("The category " + category + " already exists. You may want to use CM_Debug.CategoryExists to check if the category already exists");
+				return;
+			}
+
 			categories.Add(category, value);
+		}
+
+		public static void SetCategory(string category, bool value)
+		{
+			// Check if the category already exists
+			if (!CategoryExists(category))
+			{
+				Debug.LogWarning("Tried setting " + category + " to " + value + ". The category does not exist");
+				return;
+			}
+
+			categories[category] = value;
+		}
+
+		public static bool CategoryExists(string category)
+		{
+			return categories.ContainsKey(category);
 		}
 	}
 }

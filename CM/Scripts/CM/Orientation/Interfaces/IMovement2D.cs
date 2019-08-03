@@ -1,6 +1,9 @@
 ﻿using UnityEngine;
 
-public interface IMovement2D
+namespace CM.Orientation
 {
-	void Move(Vector2 input);
+	public interface IMovement2D
+	{
+		void Move(Vector2 input);
+	}
 }
