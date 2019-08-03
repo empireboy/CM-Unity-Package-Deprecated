@@ -5,6 +5,6 @@ namespace CM.Essentials
 {
 	public class Manager<T> : MonoBehaviour where T : class
 	{
-		public List<T> interfaces;
+		public List<T> interfaces = new List<T>();
 	}
 }
