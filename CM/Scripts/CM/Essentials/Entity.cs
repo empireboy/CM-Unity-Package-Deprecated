@@ -54,7 +54,7 @@ namespace CM.Essentials
 			{
 				GameObject moduleObject = new GameObject();
 				moduleObject.transform.parent = moduleParent.transform;
-				moduleObject.name = _moduleInterfaces[i].ToString().Remove(0, 1) + _moduleSuffix;
+				moduleObject.name = _moduleInterfaces[i].ToString() + _moduleSuffix;
 				CM_Debug.Log("CM Entity", "Created Module object " + moduleObject.name);
 			}
 		}
@@ -74,7 +74,7 @@ namespace CM.Essentials
 			Transform[] children = parentModule.GetComponentsInChildren<Transform>();
 			foreach (Transform child in children)
 			{
-				if (child.name == (typeof(T).ToString().Remove(0, 1) + _moduleSuffix))
+				if (child.name == (typeof(T).ToString() + _moduleSuffix))
 				{
 					return child.gameObject;
 				}
@@ -92,7 +92,7 @@ namespace CM.Essentials
 			Transform[] children = parentModule.GetComponentsInChildren<Transform>();
 			foreach (Transform child in children)
 			{
-				if (child.name == (moduleInterface.ToString().Remove(0, 1) + _moduleSuffix))
+				if (child.name == (moduleInterface.ToString() + _moduleSuffix))
 				{
 					return child.gameObject;
 				}
