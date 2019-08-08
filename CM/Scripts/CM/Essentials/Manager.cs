@@ -5,6 +5,11 @@ namespace CM.Essentials
 {
 	public class Manager<T> : MonoBehaviour where T : class
 	{
-		public List<T> interfaces = new List<T>();
+		protected List<T> interfaces = new List<T>();
+
+		public void AddInterface(T newInterface)
+		{
+			interfaces.Add(newInterface);
+		}
 	}
 }
