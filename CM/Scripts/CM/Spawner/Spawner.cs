@@ -15,6 +15,13 @@ namespace CM.Spawner
 		protected virtual void OnSpawn(GameObject instantiatedObject)
 		{
 			instantiatedObject.transform.position = transform.position;
+
+			ISpawning spawnerInterface = instantiatedObject.GetComponent<ISpawning>();
+
+			if (spawnerInterface != null)
+			{
+				spawnerInterface.Spawn();
+			}
 		}
 	}
 }

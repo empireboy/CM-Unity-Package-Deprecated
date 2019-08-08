@@ -1,6 +1,6 @@
 ﻿namespace CM.Spawner
 {
-	public interface ISpawner
+	public interface ISpawning
 	{
 		void Spawn();
 	}
