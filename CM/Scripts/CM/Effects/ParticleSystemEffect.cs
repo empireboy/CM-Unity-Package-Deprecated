@@ -9,7 +9,9 @@ namespace CM.Effects
 
 		public void Play()
 		{
-			_particleSystem.Play();
+			ParticleSystem effect = Instantiate(_particleSystem, transform.position, Quaternion.identity);
+
+			effect.Play();
 		}
 	}
 }

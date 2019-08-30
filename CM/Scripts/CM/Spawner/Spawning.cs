@@ -12,6 +12,9 @@ public class Spawning : MonoBehaviour, ISpawning
 
 	public void Spawn()
 	{
+		if (!_spawnPoint)
+			return;
+
 		_transformToSpawn.position = _spawnPoint.position;
 
 		// Spawn Effect
