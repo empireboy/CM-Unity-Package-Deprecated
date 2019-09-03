@@ -2,8 +2,11 @@
 
 namespace CM.Orientation
 {
-	public class LookAtPosition : MonoBehaviour, IRotateTo
+	public class RotateToPosition : MonoBehaviour, IRotateTo
 	{
+		[SerializeField]
+		protected float rotationSpeed = 1f;
+
 		[SerializeField]
 		private Transform _lookingTransform;
 
@@ -34,7 +37,11 @@ namespace CM.Orientation
 
 		protected virtual void LookAt(Vector3 position)
 		{
-			_lookingTransform.LookAt(position);
+			Vector3 targetDirection = position - _lookingTransform.position;
+			float step = rotationSpeed * Time.deltaTime;
+			Vector3 newDirection = Vector3.RotateTowards(_lookingTransform.forward, targetDirection, step, 0.0f);
+
+			_lookingTransform.rotation = Quaternion.LookRotation(newDirection);
 		}
 
 		public Vector3 GetPosition()
