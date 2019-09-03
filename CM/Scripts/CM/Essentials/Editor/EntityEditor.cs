@@ -40,10 +40,13 @@ public class EntityEditor : Editor
 		{
 			Component[] modules = entity.GetModules(entity.ModuleInterfaces[i]);
 
-			foreach (Component module in modules)
+			if (modules != null)
 			{
-				GUILayout.Label(module.ToString());
-				modulesFoundNumber++;
+				foreach (Component module in modules)
+				{
+					GUILayout.Label(module.ToString());
+					modulesFoundNumber++;
+				}
 			}
 		}
 

@@ -39,6 +39,9 @@ namespace CM.Essentials
 		public void CreateModules()
 		{
 			// Destroy Module Parent if exists
+			GameObject oldModuleParent = GetParentModuleObject();
+			if (oldModuleParent)
+				CM_Debug.Log("CM Entity", "Old module GameObject " + oldModuleParent.name + " will be destroyed immediately");
 			DestroyImmediate(GetParentModuleObject());
 
 			// Create Module Parent
@@ -71,6 +74,12 @@ namespace CM.Essentials
 
 			GameObject parentModule = GetParentModuleObject();
 
+			if (parentModule == null)
+			{
+				CM_Debug.Log("CM Entity", "Parent module object " + typeof(T).ToString() + " does not exist");
+				return null;
+			}
+
 			Transform[] children = parentModule.GetComponentsInChildren<Transform>();
 			foreach (Transform child in children)
 			{
@@ -88,6 +97,12 @@ namespace CM.Essentials
 			CM_Debug.Log("CM Entity", "Getting Module object of " + moduleInterface.ToString());
 
 			GameObject parentModule = GetParentModuleObject();
+
+			if (parentModule == null)
+			{
+				CM_Debug.Log("CM Entity", "Parent module object " + moduleInterface.ToString() + " does not exist");
+				return null;
+			}
 
 			Transform[] children = parentModule.GetComponentsInChildren<Transform>();
 			foreach (Transform child in children)
@@ -120,7 +135,12 @@ namespace CM.Essentials
 			CM_Debug.Log("CM Entity", "Getting Modules of " + typeof(T).ToString());
 
 			GameObject moduleObject = GetModuleObject<T>();
-			T[] modules = moduleObject.GetComponents<T>();
+
+			T[] modules = null;
+			if (moduleObject)
+			{
+				modules = moduleObject.GetComponents<T>();
+			}
 
 			return modules;
 		}
@@ -130,7 +150,12 @@ namespace CM.Essentials
 			CM_Debug.Log("CM Entity", "Getting Modules of " + moduleInterface.ToString());
 
 			GameObject moduleObject = GetModuleObject(moduleInterface);
-			Component[] modules = moduleObject.GetComponents(moduleInterface);
+
+			Component[] modules = null;
+			if (moduleObject)
+			{
+				modules = moduleObject.GetComponents(moduleInterface);
+			}
 
 			return modules;
 		}
