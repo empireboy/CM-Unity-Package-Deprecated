@@ -31,6 +31,11 @@ namespace CM.Orientation
 		{
 			if (_timeInterpolationFloat)
 				flipTransform.eulerAngles = new Vector3(flipTransform.eulerAngles.x, _timeInterpolationFloat.Value, flipTransform.eulerAngles.z);
+
+			if (Input.GetKeyDown(KeyCode.R))
+			{
+				Flip(true);
+			}
 		}
 	}
 }

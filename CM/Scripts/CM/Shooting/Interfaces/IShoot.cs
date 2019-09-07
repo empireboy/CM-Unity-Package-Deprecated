@@ -2,6 +2,6 @@
 {
 	public interface IShoot
 	{
-		void Shoot();
+		void Shoot(float force);
 	}
 }
