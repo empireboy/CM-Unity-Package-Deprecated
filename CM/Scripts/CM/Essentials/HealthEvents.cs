@@ -14,7 +14,7 @@ namespace CM.Essentials
 			GetComponent<Health>().TakeDamageEvent += OnTakeDamage;
 		}
 
-		private void OnTakeDamage()
+		private void OnTakeDamage(float damage)
 		{
 			_takeDamageEvent.Invoke();
 		}

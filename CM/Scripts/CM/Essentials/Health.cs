@@ -7,9 +7,20 @@ namespace CM.Essentials
 		[SerializeField]
 		private float _health = 100;
 
+		[SerializeField]
+		private GameObject _rootObject;
+
+		public float MaxHealth
+		{
+			get
+			{
+				return _health;
+			}
+		}
+
 		private float _currentHealth;
 
-		public delegate void TakeDamageHandler();
+		public delegate void TakeDamageHandler(float damage);
 		public event TakeDamageHandler TakeDamageEvent;
 
 		private void Start()
@@ -17,15 +28,14 @@ namespace CM.Essentials
 			_currentHealth = _health;
 		}
 
-		public void TakeDamage(int damageValue)
+		public void TakeDamage(float damage)
 		{
-			_currentHealth -= damageValue;
+			_currentHealth -= damage;
 
-			if (TakeDamageEvent != null)
-				TakeDamageEvent();
+			TakeDamageEvent?.Invoke(damage);
 
 			if (_currentHealth <= 0)
-				Destroy(gameObject);
+				_rootObject.SetActive(false);
 		}
 	}
 }
