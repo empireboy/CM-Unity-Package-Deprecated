@@ -26,6 +26,9 @@ namespace CM.Essentials
 
 		protected virtual void OnAwake()
 		{
+			if (!CM_Debug.CategoryExists("CM Entity"))
+				CM_Debug.AddCategory("CM Entity", false);
+
 			// Get Modules, check if the module parent exists
 			if (GetParentModuleObject())
 				InitializeModules();
