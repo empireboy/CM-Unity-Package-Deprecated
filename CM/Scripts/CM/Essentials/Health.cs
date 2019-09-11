@@ -28,6 +28,11 @@ namespace CM.Essentials
 			_currentHealth = _health;
 		}
 
+		private void OnEnable()
+		{
+			_currentHealth = _health;
+		}
+
 		public void TakeDamage(float damage)
 		{
 			_currentHealth -= damage;

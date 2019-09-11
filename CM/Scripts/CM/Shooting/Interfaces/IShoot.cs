@@ -2,6 +2,8 @@
 {
 	public interface IShoot
 	{
-		void Shoot(float force);
+		void Shoot();
+		void StopShoot();
+		bool IsShooting();
 	}
 }

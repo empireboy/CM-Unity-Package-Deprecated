@@ -2,7 +2,7 @@
 
 namespace CM.Shooting
 {
-	public class ShootProjectile3D : MonoBehaviour, IShoot
+	public class ShootProjectile3D : MonoBehaviour, IShootProjectile
 	{
 		[SerializeField]
 		private Transform _shootTransform;
@@ -20,7 +20,7 @@ namespace CM.Shooting
 			_shootTimer = _shootTime;
 		}
 
-		public void Shoot(float force)
+		public void Shoot(GameObject projectile, float force, float spray)
 		{
 			if (_shootTimer > 0f)
 			{
@@ -29,8 +29,6 @@ namespace CM.Shooting
 			}
 
 			_shootTimer = _shootTime;
-
-			GameObject projectile = _projectilePool.GetObject();
 
 			projectile.transform.position = _shootTransform.position;
 			projectile.transform.rotation = _shootTransform.rotation;

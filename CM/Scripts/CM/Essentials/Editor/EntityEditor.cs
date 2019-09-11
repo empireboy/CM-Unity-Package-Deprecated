@@ -29,7 +29,10 @@ public class EntityEditor : Editor
 
 		// Only run if there are modules created
 		if (entity.ModuleInterfaces == null)
+		{
+			entity.InitializeModules();
 			return;
+		}
 
 		GUILayout.Space(_spaceSize);
 

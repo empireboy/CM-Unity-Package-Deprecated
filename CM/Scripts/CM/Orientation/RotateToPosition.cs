@@ -8,7 +8,7 @@ namespace CM.Orientation
 		protected float rotationSpeed = 1f;
 
 		[SerializeField]
-		private Transform _lookingTransform;
+		protected Transform lookingTransform;
 
 		private void Awake()
 		{
@@ -37,16 +37,16 @@ namespace CM.Orientation
 
 		protected virtual void LookAt(Vector3 position)
 		{
-			Vector3 targetDirection = position - _lookingTransform.position;
+			Vector3 targetDirection = position - lookingTransform.position;
 			float step = rotationSpeed * Time.deltaTime;
-			Vector3 newDirection = Vector3.RotateTowards(_lookingTransform.forward, targetDirection, step, 0.0f);
+			Vector3 newDirection = Vector3.RotateTowards(lookingTransform.forward, targetDirection, step, 0.0f);
 
-			_lookingTransform.rotation = Quaternion.LookRotation(newDirection);
+			lookingTransform.rotation = Quaternion.LookRotation(newDirection);
 		}
 
 		public Vector3 GetPosition()
 		{
-			return _lookingTransform.position;
+			return lookingTransform.position;
 		}
 	}
 }

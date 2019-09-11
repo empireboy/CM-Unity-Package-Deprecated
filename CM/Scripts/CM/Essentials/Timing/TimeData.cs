@@ -85,7 +85,7 @@ namespace CM.Essentials.Timing
 			float totalSeconds = a.TotalSeconds - b.TotalSeconds;
 
 			if (totalSeconds < 0f)
-				Debug.LogWarning("Cannot have a negative value for TimeData.seconds");
+				totalSeconds = 0f;
 
 			timeData.Seconds = totalSeconds;
 
@@ -105,7 +105,7 @@ namespace CM.Essentials.Timing
 			float totalSeconds = a.TotalSeconds + b;
 
 			if (totalSeconds < 0f)
-				Debug.LogWarning("Cannot have a negative value for TimeData.seconds");
+				totalSeconds = 0f;
 
 			timeData.Seconds = totalSeconds;
 
@@ -125,7 +125,7 @@ namespace CM.Essentials.Timing
 			float totalSeconds = a.TotalSeconds - b;
 
 			if (totalSeconds < 0f)
-				Debug.LogWarning("Cannot have a negative value for TimeData.seconds");
+				totalSeconds = 0f;
 
 			timeData.Seconds = totalSeconds;
 
@@ -141,6 +141,11 @@ namespace CM.Essentials.Timing
 		public static float operator /(float a, TimeData b)
 		{
 			return a / b.TotalSeconds;
+		}
+
+		public static float operator /(TimeData a, float b)
+		{
+			return a.TotalSeconds / b;
 		}
 
 		public static bool operator <(float a, TimeData b)
@@ -161,6 +166,26 @@ namespace CM.Essentials.Timing
 		public static bool operator >(TimeData a, float b)
 		{
 			return a.TotalSeconds > b;
+		}
+
+		public static bool operator <=(float a, TimeData b)
+		{
+			return a <= b.TotalSeconds;
+		}
+
+		public static bool operator >=(float a, TimeData b)
+		{
+			return a >= b.TotalSeconds;
+		}
+
+		public static bool operator <=(TimeData a, float b)
+		{
+			return a.TotalSeconds <= b;
+		}
+
+		public static bool operator >=(TimeData a, float b)
+		{
+			return a.TotalSeconds >= b;
 		}
 	}
 }
