@@ -1,4 +1,5 @@
 ﻿using CM.Essentials;
+using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 
@@ -6,14 +7,11 @@ using UnityEngine;
 public class EntityEditor : Editor
 {
 	private float _spaceSize = 20f;
+	private bool[] _moduleFoldouts = new bool[0];
 
 	public override void OnInspectorGUI()
 	{
 		base.OnInspectorGUI();
-
-		// Only run in Editor mode while not playing
-		if (Application.isPlaying)
-			return;
 
 		// Get the target entity
 		Entity entity = (Entity)target;
@@ -37,23 +35,32 @@ public class EntityEditor : Editor
 		GUILayout.Space(_spaceSize);
 
 		// Found Modules
-		int modulesFoundNumber = 0;
+		List<Component> modules = new List<Component>();
 
 		for (int i = 0; i < entity.ModuleInterfaces.Length; i++)
 		{
-			Component[] modules = entity.GetModules(entity.ModuleInterfaces[i]);
-
-			if (modules != null)
-			{
-				foreach (Component module in modules)
-				{
-					GUILayout.Label(module.ToString());
-					modulesFoundNumber++;
-				}
-			}
+			modules.AddRange(entity.GetModules(entity.ModuleInterfaces[i]));
 		}
 
 		// Display a Label with: "Modules Found (modulesFoundNumber)"
-		GUILayout.Label("Modules Found " + "(" + modulesFoundNumber + ")", EditorStyles.boldLabel);
+		GUILayout.Label("Modules Found " + "(" + modules.Count + ")", EditorStyles.boldLabel);
+
+		if (_moduleFoldouts.Length != modules.Count)
+		{
+			_moduleFoldouts = new bool[modules.Count];
+		}
+
+		for (int i = 0; i < modules.Count; i++)
+		{
+			//modules[i].hideFlags = HideFlags.None;
+
+			Editor tmpEditor = CreateEditor(modules[i]);
+			_moduleFoldouts[i] = EditorGUILayout.Foldout(_moduleFoldouts[i], modules[i].ToString(), true, EditorStyles.foldout);
+
+			if (_moduleFoldouts[i])
+			{
+				tmpEditor.OnInspectorGUI();
+			}
+		}
 	}
 }

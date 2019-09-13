@@ -13,13 +13,16 @@ namespace CM.Orientation
 
 		protected override void OnFlip(bool flip)
 		{
+			if (_timeInterpolationFloat)
+				Destroy(_timeInterpolationFloat);
+
 			switch (flip)
 			{
 				case true:
-					_timeInterpolationFloat = TimeInterpolationFloat.InterpolateTo(gameObject, 0, 180, flipTime, null);
+					_timeInterpolationFloat = TimeInterpolationFloat.InterpolateTo(gameObject, 0, 180, flipTime, OnFlipFinish);
 					break;
 				case false:
-					_timeInterpolationFloat = TimeInterpolationFloat.InterpolateTo(gameObject, 180, 0, flipTime, null);
+					_timeInterpolationFloat = TimeInterpolationFloat.InterpolateTo(gameObject, 180, 0, flipTime, OnFlipFinish);
 					break;
 
 			}
@@ -31,11 +34,6 @@ namespace CM.Orientation
 		{
 			if (_timeInterpolationFloat)
 				flipTransform.eulerAngles = new Vector3(flipTransform.eulerAngles.x, _timeInterpolationFloat.Value, flipTransform.eulerAngles.z);
-
-			if (Input.GetKeyDown(KeyCode.R))
-			{
-				Flip(true);
-			}
 		}
 	}
 }

@@ -17,39 +17,21 @@ MonoBehaviour:
     - serializedVersion: 3
       time: 0
       value: 1
-      inSlope: 0
-      outSlope: 0
+      inSlope: -0.45
+      outSlope: -0.45
       tangentMode: 34
       weightedMode: 0
       inWeight: 0
-      outWeight: 0
+      outWeight: 0.33333334
     - serializedVersion: 3
-      time: 1
-      value: 1
-      inSlope: 0
-      outSlope: 0
+      time: 2
+      value: 0.1
+      inSlope: -0.45
+      outSlope: -0.45
       tangentMode: 34
       weightedMode: 0
-      inWeight: 0
+      inWeight: 0.33333334
       outWeight: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  fireDelayStart:
-    seconds: 0
-    minutes: 0
-    hours: 0
-  fireDelayEnd:
-    seconds: 2
-    minutes: 0
-    hours: 0
-  burst: 0
-  shotsPerBurst: 3
-  bursts: 1
-  delayPerBurst:
-    seconds: 0.25
-    minutes: 0
-    hours: 0
-  exponentiallyIncreaseFireRate: 1
-  exponentValue: 1.1
-  exponentValueMinMax: 2

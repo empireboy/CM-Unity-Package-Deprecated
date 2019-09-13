@@ -4,5 +4,6 @@
 	{
 		void Flip(bool flip);
 		bool IsFlipped();
+		bool IsFlipping();
 	}
 }

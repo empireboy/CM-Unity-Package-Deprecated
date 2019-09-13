@@ -12,8 +12,7 @@ namespace CM
 			// Add category if it doesn't exist
 			if (!CategoryExists(category))
 			{
-				Debug.Log(message);
-				categories.Add(category, true);
+				categories.Add(category, false);
 			}
 
 			// Return if the current category is set to false

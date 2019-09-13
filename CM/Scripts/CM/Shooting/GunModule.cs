@@ -56,11 +56,16 @@ namespace CM.Shooting
 
 		private void OnShootChecked()
 		{
-			GameObject projectile = _bulletPool.GetObject();
-
 			// Shoot the projectile if it exists
-			if (projectile)
-				_shootProjectileModule.Shoot(projectile, _equippedGun.shootForce, _equippedGun.spray);
+			for (int i = 0; i < _equippedGun.projectilesPerShot; i++)
+			{
+				GameObject projectile = _bulletPool.GetObject();
+
+				if (projectile)
+				{
+					_shootProjectileModule.Shoot(projectile, _equippedGun.shootForce, _equippedGun.spray);
+				}
+			}
 		}
 
 		public bool IsShooting()

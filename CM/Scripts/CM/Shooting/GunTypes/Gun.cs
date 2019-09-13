@@ -9,5 +9,6 @@ namespace CM.Shooting
 		public GameObject projectile;
 		public float shootForce = 1f;
 		public float spray = 0f;
+		public float projectilesPerShot = 1f;
 	}
 }
