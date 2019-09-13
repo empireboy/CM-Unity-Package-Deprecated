@@ -16,11 +16,12 @@ namespace CM.Shooting
 			SprayPattern sprayPattern = (SprayPattern) target;
 
 			GUI.backgroundColor = Color.gray;
-			GUI.Box(new Rect(50, 120, 400, 400), "Spray Pattern Visualizer");
+
+			GUI.Box(new Rect(50, (20 * sprayPattern.sprayPoints.Count) + 120, 400, 400), "Spray Pattern Visualizer");
 
 			for (int i = 0; i < sprayPattern.sprayPoints.Count; i++)
 			{
-				EditorGUI.DrawRect(new Rect(50 + 400 / 2 + sprayPattern.sprayPoints[i].x * _scale, 120 + 400 / 2 + sprayPattern.sprayPoints[i].y * _scale, 10, 10), Color.black);
+				EditorGUI.DrawRect(new Rect(50 + 400 / 2 + sprayPattern.sprayPoints[i].x * _scale, (20 * sprayPattern.sprayPoints.Count) + 120 + 400 / 2 + sprayPattern.sprayPoints[i].y * _scale, 10, 10), Color.Lerp(Color.red, Color.green, i / sprayPattern.sprayPoints.Count));
 			}
 		}
 	}
