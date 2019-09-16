@@ -11,4 +11,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5df40307572eacc46857f0e45095e15f, type: 3}
   m_Name: SprayPatternExample
   m_EditorClassIdentifier: 
-  sprayPoints: []
+  sprayPoints:
+  - {x: 0, y: 0}
+  - {x: 0, y: -3}
+  - {x: 0, y: -8}
+  - {x: -2, y: -12}
+  - {x: -6, y: -14}

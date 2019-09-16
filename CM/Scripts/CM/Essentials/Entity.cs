@@ -12,7 +12,7 @@ namespace CM.Essentials
 		public Type[] ModuleInterfaces { get => _moduleInterfaces; }
 
 		private string _moduleParentName = "Modules";
-		private string _moduleSuffix = "_Module";
+		//private string _moduleSuffix = "_Module";
 
 		private void Awake()
 		{
@@ -29,8 +29,16 @@ namespace CM.Essentials
 			if (!CM_Debug.CategoryExists("CM Entity"))
 				CM_Debug.AddCategory("CM Entity", false);
 
+			// Create Module Parent
+			if (!GetModuleObject())
+			{
+				GameObject moduleParent = new GameObject();
+				moduleParent.transform.parent = transform;
+				moduleParent.name = _moduleParentName;
+			}
+
 			// Get Modules, check if the module parent exists
-			if (GetParentModuleObject())
+			if (GetModuleObject())
 				InitializeModules();
 		}
 
@@ -39,87 +47,13 @@ namespace CM.Essentials
 			// This can be overridden
 		}
 
-		public void CreateModules()
-		{
-			// Destroy Module Parent if exists
-			GameObject oldModuleParent = GetParentModuleObject();
-			if (oldModuleParent)
-				CM_Debug.Log("CM Entity", "Old module GameObject " + oldModuleParent.name + " will be destroyed immediately");
-			DestroyImmediate(GetParentModuleObject());
-
-			// Create Module Parent
-			GameObject moduleParent = new GameObject();
-			moduleParent.transform.parent = transform;
-			moduleParent.name = _moduleParentName;
-
-			// Get interfaces
-			InitializeModules();
-
-			// Create all Modules
-			for (int i = 0; i < _moduleInterfaces.Length; i++)
-			{
-				GameObject moduleObject = new GameObject();
-				moduleObject.transform.parent = moduleParent.transform;
-				moduleObject.name = _moduleInterfaces[i].ToString() + _moduleSuffix;
-				CM_Debug.Log("CM Entity", "Created Module object " + moduleObject.name);
-			}
-		}
-
 		public void InitializeModules()
 		{
 			CM_Debug.Log("CM Entity", "Initializing Modules");
 			_moduleInterfaces = this.GetType().GetInterfaces();
 		}
 
-		public GameObject GetModuleObject<T>()
-		{
-			CM_Debug.Log("CM Entity", "Getting Module object of " + typeof(T).ToString());
-
-			GameObject parentModule = GetParentModuleObject();
-
-			if (parentModule == null)
-			{
-				CM_Debug.Log("CM Entity", "Parent module object " + typeof(T).ToString() + " does not exist");
-				return null;
-			}
-
-			Transform[] children = parentModule.GetComponentsInChildren<Transform>();
-			foreach (Transform child in children)
-			{
-				if (child.name == (typeof(T).ToString() + _moduleSuffix))
-				{
-					return child.gameObject;
-				}
-			}
-
-			return null;
-		}
-
-		public GameObject GetModuleObject(Type moduleInterface)
-		{
-			CM_Debug.Log("CM Entity", "Getting Module object of " + moduleInterface.ToString());
-
-			GameObject parentModule = GetParentModuleObject();
-
-			if (parentModule == null)
-			{
-				CM_Debug.Log("CM Entity", "Parent module object " + moduleInterface.ToString() + " does not exist");
-				return null;
-			}
-
-			Transform[] children = parentModule.GetComponentsInChildren<Transform>();
-			foreach (Transform child in children)
-			{
-				if (child.name == (moduleInterface.ToString() + _moduleSuffix))
-				{
-					return child.gameObject;
-				}
-			}
-
-			return null;
-		}
-
-		private GameObject GetParentModuleObject()
+		public GameObject GetModuleObject()
 		{
 			Transform[] children = gameObject.GetComponentsInChildren<Transform>();
 			foreach (Transform child in children)
@@ -137,7 +71,7 @@ namespace CM.Essentials
 		{
 			CM_Debug.Log("CM Entity", "Getting Modules of " + typeof(T).ToString());
 
-			GameObject moduleObject = GetModuleObject<T>();
+			GameObject moduleObject = GetModuleObject();
 
 			T[] modules = null;
 			if (moduleObject)
@@ -152,7 +86,7 @@ namespace CM.Essentials
 		{
 			CM_Debug.Log("CM Entity", "Getting Modules of " + moduleInterface.ToString());
 
-			GameObject moduleObject = GetModuleObject(moduleInterface);
+			GameObject moduleObject = GetModuleObject();
 
 			Component[] modules = null;
 			if (moduleObject)

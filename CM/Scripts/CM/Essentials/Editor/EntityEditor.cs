@@ -1,4 +1,5 @@
-﻿using CM.Essentials;
+﻿using CM;
+using CM.Essentials;
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
@@ -16,23 +17,12 @@ public class EntityEditor : Editor
 		// Get the target entity
 		Entity entity = (Entity)target;
 
-		// Entity Label
-		GUILayout.Label("Modules", EditorStyles.boldLabel);
-
-		// Create Modules
-		if (GUILayout.Button("Create Modules"))
-		{
-			entity.CreateModules();
-		}
-
 		// Only run if there are modules created
 		if (entity.ModuleInterfaces == null)
 		{
 			entity.InitializeModules();
 			return;
 		}
-
-		GUILayout.Space(_spaceSize);
 
 		// Found Modules
 		List<Component> modules = new List<Component>();
@@ -55,12 +45,66 @@ public class EntityEditor : Editor
 			//modules[i].hideFlags = HideFlags.None;
 
 			Editor tmpEditor = CreateEditor(modules[i]);
-			_moduleFoldouts[i] = EditorGUILayout.Foldout(_moduleFoldouts[i], modules[i].ToString(), true, EditorStyles.foldout);
+
+			EditorGUILayout.BeginVertical("Box");
+
+			GUIStyle style = new GUIStyle() {
+				fontStyle = FontStyle.Bold,
+				stretchWidth = true,
+				stretchHeight = false,
+				alignment = TextAnchor.MiddleLeft,
+				margin = new RectOffset(30, 0, 0, 0)
+			};
+			_moduleFoldouts[i] = EditorGUILayout.Foldout(_moduleFoldouts[i], modules[i].ToString(), true, style);
 
 			if (_moduleFoldouts[i])
 			{
+				EditorGUILayout.BeginVertical("Box");
+
 				tmpEditor.OnInspectorGUI();
+
+				EditorGUILayout.EndVertical();
 			}
+
+			EditorGUILayout.EndVertical();
 		}
+
+		EditorGUILayout.BeginHorizontal("Box");
+
+		// Open all foldouts
+		if (GUILayout.Button("Open All"))
+		{
+			CM_Debug.Log("CM Entity", "Opening all foldouts");
+
+			for (int i = 0; i < _moduleFoldouts.Length; i++)
+				_moduleFoldouts[i] = true;
+		}
+
+		// Close all foldouts
+		if (GUILayout.Button("Close All"))
+		{
+			CM_Debug.Log("CM Entity", "Closing all foldouts");
+
+			for (int i = 0; i < _moduleFoldouts.Length; i++)
+				_moduleFoldouts[i] = false;
+		}
+
+		// Hide Module object
+		if (GUILayout.Button("Hide Modules"))
+		{
+			CM_Debug.Log("CM Entity", "Hiding all modules");
+
+			entity.GetModuleObject().hideFlags = HideFlags.HideInInspector;
+		}
+
+		// Show Module object
+		if (GUILayout.Button("Show Modules"))
+		{
+			CM_Debug.Log("CM Entity", "Showing all modules");
+
+			entity.GetModuleObject().hideFlags = HideFlags.None;
+		}
+
+		EditorGUILayout.EndHorizontal();
 	}
 }
