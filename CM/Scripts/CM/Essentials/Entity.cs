@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace CM.Essentials
@@ -73,11 +74,31 @@ namespace CM.Essentials
 
 			GameObject moduleObject = GetModuleObject();
 
-			T[] modules = null;
+			List<T> modulesList = new List<T>();
 			if (moduleObject)
 			{
-				modules = moduleObject.GetComponents<T>();
+				T[] tmpModules;
+
+				// Add components
+				tmpModules = moduleObject.GetComponents<T>();
+				foreach (T module in tmpModules)
+				{
+					// Not including duplicates
+					if (!modulesList.Contains(module))
+						modulesList.Add(module);
+				}
+
+				// Add components from all children
+				tmpModules = moduleObject.GetComponentsInChildren<T>();
+				foreach (T module in tmpModules)
+				{
+					// Not including duplicates
+					if (!modulesList.Contains(module))
+						modulesList.Add(module);
+				}
 			}
+
+			T[] modules = modulesList.ToArray();
 
 			return modules;
 		}
@@ -88,11 +109,31 @@ namespace CM.Essentials
 
 			GameObject moduleObject = GetModuleObject();
 
-			Component[] modules = null;
+			List<Component> modulesList = new List<Component>();
 			if (moduleObject)
 			{
-				modules = moduleObject.GetComponents(moduleInterface);
+				Component[] tmpModules;
+
+				// Add components
+				tmpModules = moduleObject.GetComponents(moduleInterface);
+				foreach (Component module in tmpModules)
+				{
+					// Not including duplicates
+					if (!modulesList.Contains(module))
+						modulesList.Add(module);
+				}
+
+				// Add components from all children
+				tmpModules = moduleObject.GetComponentsInChildren(moduleInterface);
+				foreach (Component module in tmpModules)
+				{
+					// Not including duplicates
+					if (!modulesList.Contains(module))
+						modulesList.Add(module);
+				}
 			}
+
+			Component[] modules = modulesList.ToArray();
 
 			return modules;
 		}
