@@ -19,11 +19,17 @@ namespace CM.UI
 		private void Start()
 		{
 			_health.TakeDamageEvent += OnTakeDamage;
+			_health.FullHealthEvent += OnFullHealth;
 		}
 
 		private void OnTakeDamage(float damage)
 		{
 			_slider.value -= damage / _health.MaxHealth;
+		}
+
+		private void OnFullHealth(float value)
+		{
+			_slider.value = 1;
 		}
 	}
 }
