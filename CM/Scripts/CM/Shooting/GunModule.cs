@@ -44,10 +44,12 @@ namespace CM.Shooting
 
 		public void Shoot()
 		{
-			_shootController = ShootController.StartChecking(gameObject, _equippedGun.shootingType);
+			ShootController shootController = ShootController.StartChecking(gameObject, _equippedGun.shootingType);
 
-			if (!_shootController)
+			if (!shootController)
 				return;
+
+			_shootController = shootController;
 
 			_shootController.ShootEvent += OnShootChecked;
 
