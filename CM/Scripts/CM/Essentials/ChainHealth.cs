@@ -2,22 +2,14 @@
 
 namespace CM.Essentials
 {
-	public class ChainHealth : MonoBehaviour
+	public abstract class ChainHealth : MonoBehaviour
 	{
 		[SerializeField]
-		private Health _healthCaller;
+		protected Health healthCaller;
 
 		[SerializeField]
-		private Health _healthReceiver;
+		protected Health healthReceiver;
 
-		private void Start()
-		{
-			_healthCaller.DeathEvent += OnBaseDeath;
-		}
-
-		private void OnBaseDeath(float damage)
-		{
-			_healthReceiver.TakeDamage(damage);
-		}
+		protected abstract void OnChain(float damage);
 	}
 }
