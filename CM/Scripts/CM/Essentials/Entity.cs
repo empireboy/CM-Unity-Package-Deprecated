@@ -13,7 +13,6 @@ namespace CM.Essentials
 		public Type[] ModuleInterfaces { get => _moduleInterfaces; }
 
 		private string _moduleParentName = "Modules";
-		//private string _moduleSuffix = "_Module";
 
 		private void Awake()
 		{
@@ -70,6 +69,11 @@ namespace CM.Essentials
 
 		public T[] GetModules<T>()
 		{
+			return GetModules<T>(false);
+		}
+
+		public T[] GetModules<T>(bool includeInactive)
+		{
 			CM_Debug.Log("CM Entity", "Getting Modules of " + typeof(T).ToString());
 
 			GameObject moduleObject = GetModuleObject();
@@ -89,7 +93,7 @@ namespace CM.Essentials
 				}
 
 				// Add components from all children
-				tmpModules = moduleObject.GetComponentsInChildren<T>();
+				tmpModules = moduleObject.GetComponentsInChildren<T>(includeInactive);
 				foreach (T module in tmpModules)
 				{
 					// Not including duplicates
@@ -104,6 +108,11 @@ namespace CM.Essentials
 		}
 
 		public Component[] GetModules(Type moduleInterface)
+		{
+			return GetModules(moduleInterface, false);
+		}
+
+		public Component[] GetModules(Type moduleInterface, bool includeInactive)
 		{
 			CM_Debug.Log("CM Entity", "Getting Modules of " + moduleInterface.ToString());
 
@@ -124,7 +133,7 @@ namespace CM.Essentials
 				}
 
 				// Add components from all children
-				tmpModules = moduleObject.GetComponentsInChildren(moduleInterface);
+				tmpModules = moduleObject.GetComponentsInChildren(moduleInterface, includeInactive);
 				foreach (Component module in tmpModules)
 				{
 					// Not including duplicates

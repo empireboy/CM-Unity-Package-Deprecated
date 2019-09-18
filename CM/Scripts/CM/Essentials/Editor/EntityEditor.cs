@@ -10,8 +10,6 @@ public class EntityEditor : Editor
 	private float _spaceSize = 20f;
 	private bool[] _moduleFoldouts = new bool[0];
 
-	private GUIStyle _foldoutStyle;
-
 	public override void OnInspectorGUI()
 	{
 		base.OnInspectorGUI();
@@ -31,7 +29,8 @@ public class EntityEditor : Editor
 
 		for (int i = 0; i < entity.ModuleInterfaces.Length; i++)
 		{
-			Component[] tmpModules = entity.GetModules(entity.ModuleInterfaces[i]);
+			Component[] tmpModules = entity.GetModules(entity.ModuleInterfaces[i], true);
+
 			foreach (Component module in tmpModules)
 			{
 				// Not including duplicates
@@ -54,15 +53,26 @@ public class EntityEditor : Editor
 
 			EditorGUILayout.BeginVertical("Box");
 
-			_foldoutStyle = new GUIStyle()
+			EditorGUILayout.BeginHorizontal();
+
+			// Foldouts
+			GUIStyle foldoutStyle = new GUIStyle()
 			{
 				fontStyle = FontStyle.Bold,
 				stretchWidth = true,
 				stretchHeight = false,
 				alignment = TextAnchor.MiddleLeft,
-				margin = new RectOffset(30, 0, 0, 0)
+				margin = new RectOffset(20, 0, 0, 0)
 			};
-			_moduleFoldouts[i] = EditorGUILayout.Foldout(_moduleFoldouts[i], modules[i].ToString(), true, _foldoutStyle);
+			_moduleFoldouts[i] = EditorGUILayout.Foldout(_moduleFoldouts[i], modules[i].ToString(), true, foldoutStyle);
+
+			// Module activate GameObject checkbox
+			if (modules[i].gameObject.name != "Modules")
+			{
+				modules[i].gameObject.SetActive(EditorGUILayout.Toggle(modules[i].gameObject.activeInHierarchy, GUILayout.ExpandWidth(true), GUILayout.Width(20), GUILayout.Height(20)));
+			}
+
+			EditorGUILayout.EndHorizontal();
 
 			if (_moduleFoldouts[i])
 			{
@@ -94,6 +104,19 @@ public class EntityEditor : Editor
 
 			for (int i = 0; i < _moduleFoldouts.Length; i++)
 				_moduleFoldouts[i] = false;
+		}
+
+		// Activate all Modules
+		if (GUILayout.Button("Activate All"))
+		{
+			CM_Debug.Log("CM Entity", "Activating all Modules");
+
+			Transform[] childs = entity.GetModuleObject().GetComponentsInChildren<Transform>(true);
+
+			for (int i = 0; i < childs.Length; i++)
+			{
+				childs[i].gameObject.SetActive(true);
+			}
 		}
 
 		EditorGUILayout.EndHorizontal();
