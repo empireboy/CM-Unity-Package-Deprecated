@@ -45,7 +45,8 @@ namespace CM.Essentials
 		private void OnEnable()
 		{
 			_currentHealth = _health;
-			FullHealthEvent(0);
+
+			FullHealthEvent?.Invoke(0);
 		}
 
 		public void TakeDamage(float damage)
