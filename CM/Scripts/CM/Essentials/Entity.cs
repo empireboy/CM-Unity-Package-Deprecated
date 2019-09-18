@@ -24,6 +24,29 @@ namespace CM.Essentials
 			OnStart();
 		}
 
+		private void OnEnable()
+		{
+			// Activate modules
+			List<Component> modules = new List<Component>();
+
+			for (int i = 0; i < _moduleInterfaces.Length; i++)
+			{
+				Component[] tmpModules = GetModules(_moduleInterfaces[i], true);
+
+				foreach (Component module in tmpModules)
+				{
+					// Not including duplicates
+					if (!modules.Contains(module))
+						modules.Add(module);
+				}
+			}
+
+			foreach (Component module in modules)
+			{
+				module.gameObject.SetActive(true);
+			}
+		}
+
 		protected virtual void OnAwake()
 		{
 			if (!CM_Debug.CategoryExists("CM Entity"))
