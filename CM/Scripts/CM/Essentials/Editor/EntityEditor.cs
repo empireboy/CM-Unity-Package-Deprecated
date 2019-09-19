@@ -18,7 +18,7 @@ public class EntityEditor : Editor
 		Entity entity = (Entity)target;
 
 		// Only run if there are modules created
-		if (entity.ModuleInterfaces == null)
+		if (entity.ModuleInterfaces.Length == 0)
 		{
 			entity.InitializeModules();
 			return;

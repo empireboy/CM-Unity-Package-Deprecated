@@ -9,7 +9,7 @@ namespace CM.Essentials
 	{
 		[Header("Entity")]
 
-		private Type[] _moduleInterfaces;
+		private Type[] _moduleInterfaces = new Type[0];
 		public Type[] ModuleInterfaces { get => _moduleInterfaces; }
 
 		private string _moduleParentName = "Modules";
