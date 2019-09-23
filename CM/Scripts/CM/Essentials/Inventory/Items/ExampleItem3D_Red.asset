@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 226c2b7ee3335d843b1e339fa259e551, type: 3}
+  m_Name: ExampleItem3D_Red
+  m_EditorClassIdentifier: 
+  itemName: Example Item 3D
+  itemDescription: An Example Item for 3D representation.
+  physicalRepresentation: {fileID: 1162867750179240, guid: 1ffacb673f021f64da4da3b7bf16210b,
+    type: 2}
+  stackLimit: 1

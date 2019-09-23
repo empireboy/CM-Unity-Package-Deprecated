@@ -23,7 +23,7 @@ GameObject:
   - component: {fileID: 114527815104124024}
   - component: {fileID: 114197765375918998}
   m_Layer: 0
-  m_Name: ItemSlotExample
+  m_Name: ItemSlotUIExample
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -182,7 +182,7 @@ GameObject:
   m_Component:
   - component: {fileID: 224404057857217368}
   m_Layer: 0
-  m_Name: InventoryExample
+  m_Name: InventoryUIExample
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -611,7 +611,7 @@ MonoBehaviour:
     m_Bottom: 0
   m_ChildAlignment: 0
   m_StartCorner: 0
-  m_StartAxis: 1
+  m_StartAxis: 0
   m_CellSize: {x: 16, y: 16}
   m_Spacing: {x: 8, y: 8}
   m_Constraint: 1
