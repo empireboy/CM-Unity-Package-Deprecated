@@ -1,4 +1,5 @@
-﻿using UnityEngine.UI;
+﻿/*
+using UnityEngine.UI;
 using UnityEngine;
 using CM.Essentials.GridExtension;
 
@@ -40,3 +41,4 @@ namespace CM.Essentials.Inventory
 		public abstract void OnItemAdded(Inventory inventory, Item item, int row, int column);
 	}
 }
+*/

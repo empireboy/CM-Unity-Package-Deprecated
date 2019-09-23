@@ -2,7 +2,7 @@
 %TAG !u! tag:unity3d.com,2011:
 --- !u!114 &11400000
 MonoBehaviour:
-  m_ObjectHideFlags: 0
+  m_ObjectHideFlags: 52
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 0}
@@ -11,8 +11,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 69a0c46d61b4a2a4298ecbedb71a14db, type: 3}
   m_Name: ExampleInventory
   m_EditorClassIdentifier: 
-  _title: ExampleInventory
-  _rows: 5
-  _columns: 2
-  _containingItemsByTitleTemp:
-  - ExampleItem
+  stock:
+  - item: {fileID: 11400000, guid: 16cddb9a78a82a543b627aa7e21b38f8, type: 2}
+    quantity: 1
+  - item: {fileID: 0}
+    quantity: 0
+  - item: {fileID: 11400000, guid: 16cddb9a78a82a543b627aa7e21b38f8, type: 2}
+    quantity: 0
+  - item: {fileID: 0}
+    quantity: 0
+  - item: {fileID: 11400000, guid: 16cddb9a78a82a543b627aa7e21b38f8, type: 2}
+    quantity: 0
+  - item: {fileID: 11400000, guid: 16cddb9a78a82a543b627aa7e21b38f8, type: 2}
+    quantity: 0
+  - item: {fileID: 0}
+    quantity: 0
+  - item: {fileID: 0}
+    quantity: 0
+  - item: {fileID: 11400000, guid: 16cddb9a78a82a543b627aa7e21b38f8, type: 2}
+    quantity: 0
+  - item: {fileID: 0}
+    quantity: 0

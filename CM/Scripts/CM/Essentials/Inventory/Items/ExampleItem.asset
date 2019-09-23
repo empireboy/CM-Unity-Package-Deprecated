@@ -8,8 +8,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1e8c8b8e4575b1a4d81260426bda3327, type: 3}
+  m_Script: {fileID: 11500000, guid: 226c2b7ee3335d843b1e339fa259e551, type: 3}
   m_Name: ExampleItem
   m_EditorClassIdentifier: 
-  _title: ExampleItem
-  _description: Example Description
+  itemName: Example Item
+  itemDescription: An Example Item.
+  physicalRepresentation: {fileID: 1599217822915116, guid: 302fb6be954874d47aa6bfd4dfc59f97,
+    type: 2}
+  stackLimit: 1
