@@ -9,16 +9,14 @@ public class ShootController : MonoBehaviour
 
 	private float _timer = 0f;
 
-	private float _totalShootingTime = 0f;
-
-	//private float _exponentValue = 1f;
-
 	public delegate void ShootHandler();
 	public event ShootHandler ShootEvent;
 
 	public void Execute(ShootingType shootingType)
 	{
 		_shootingType = shootingType;
+
+		_timer = 1 / shootingType.fireRate;
 
 		_isExecuting = true;
 	}
@@ -38,9 +36,7 @@ public class ShootController : MonoBehaviour
 			if (ShootEvent != null)
 				ShootEvent.Invoke();
 
-			_timer = _shootingType.fireRate.Evaluate(_totalShootingTime);
-
-			_totalShootingTime += _timer;
+			StopChecking();
 		}
 	}
 

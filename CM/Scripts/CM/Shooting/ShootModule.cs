@@ -2,10 +2,10 @@
 
 namespace CM.Shooting
 {
-	public class GunModule : MonoBehaviour, IShoot, IEquipGun
+	public class ShootModule : MonoBehaviour, IShoot
 	{
 		[SerializeField]
-		private Gun _equippedGun;
+		private ShootingType _shootingType;
 
 		private IShootProjectile _shootProjectileModule;
 
@@ -18,25 +18,14 @@ namespace CM.Shooting
 		private void Awake()
 		{
 			_shootProjectileModule = GetComponent<IShootProjectile>();
-		}
-
-		private void Start()
-		{
-			if (_equippedGun != null)
-				EquipGun(_equippedGun);
-		}
-
-		public void EquipGun(Gun gun)
-		{
-			_equippedGun = gun;
 
 			ObjectPool[] objectPools = FindObjectsOfType<ObjectPool>();
 
-			for (int i = 0; i < objectPools.Length; i++)
+			foreach (ObjectPool objectPool in objectPools)
 			{
-				if (objectPools[i]._P_PrefabGameObject == gun.projectile)
+				if (objectPool._P_PrefabGameObject == _shootingType.projectilePrefab)
 				{
-					_bulletPool = objectPools[i];
+					_bulletPool = objectPool;
 					break;
 				}
 			}
@@ -44,7 +33,10 @@ namespace CM.Shooting
 
 		public void Shoot()
 		{
-			ShootController shootController = ShootController.StartChecking(gameObject, _equippedGun.shootingType);
+			if (_shootController)
+				return;
+
+			ShootController shootController = ShootController.StartChecking(gameObject, _shootingType);
 
 			if (!shootController)
 				return;
@@ -59,29 +51,22 @@ namespace CM.Shooting
 		private void OnShootChecked()
 		{
 			// Shoot the projectile if it exists
-			for (int i = 0; i < _equippedGun.projectilesPerShot; i++)
+			for (int i = 0; i < _shootingType.projectilesPerShot; i++)
 			{
 				GameObject projectile = _bulletPool.GetObject();
 
 				if (projectile)
 				{
-					_shootProjectileModule.Shoot(projectile, _equippedGun.shootForce, _equippedGun.spray);
+					_shootProjectileModule.Shoot(projectile, _shootingType.shootForce, _shootingType.spray);
 				}
 			}
+
+			_isShooting = false;
 		}
 
 		public bool IsShooting()
 		{
 			return _isShooting;
-		}
-
-		public void StopShoot()
-		{
-			if (_shootController)
-			{
-				_shootController.StopChecking();
-				_isShooting = false;
-			}
 		}
 	}
 }

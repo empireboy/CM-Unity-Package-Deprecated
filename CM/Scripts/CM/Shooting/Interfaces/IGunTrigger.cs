@@ -2,7 +2,7 @@
 {
 	public interface IGunTrigger
 	{
-		void SetState(GunTriggerState state);
+		void SetTriggerState(GunTriggerState state);
 		void Trigger();
 	}
 }

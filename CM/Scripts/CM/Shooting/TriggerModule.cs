@@ -3,9 +3,13 @@ using UnityEngine.Events;
 
 namespace CM.Shooting
 {
-	internal class TriggerModule : MonoBehaviour, IGunTrigger
+	public class TriggerModule : MonoBehaviour, IGunTrigger
 	{
+		[SerializeField]
 		private GunTriggerState _state = GunTriggerState.None;
+
+		[SerializeField]
+		private GameObject _shootModuleObject;
 
 		private IShoot _shootModule;
 
@@ -14,10 +18,10 @@ namespace CM.Shooting
 
 		private void Awake()
 		{
-			_shootModule = GetComponent<IShoot>();
+			_shootModule = _shootModuleObject.GetComponent<IShoot>();
 		}
 
-		public void SetState(GunTriggerState state)
+		public void SetTriggerState(GunTriggerState state)
 		{
 			_state = state;
 		}
