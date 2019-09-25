@@ -7,6 +7,12 @@ namespace CM.Shooting
 		[SerializeField]
 		private ShootingType _shootingType;
 
+		[SerializeField]
+		private Transform _shootTransform;
+
+		[SerializeField]
+		private GameObject _muzzle;
+
 		private IShootProjectile _shootProjectileModule;
 
 		private bool _isShooting = false;
@@ -59,6 +65,13 @@ namespace CM.Shooting
 				{
 					_shootProjectileModule.Shoot(projectile, _shootingType.shootForce, _shootingType.spray);
 				}
+			}
+
+			// Instantiate Muzzle
+			if (_muzzle)
+			{
+				GameObject muzzle = Instantiate(_muzzle, _shootTransform);
+				Destroy(muzzle, 0.1f);
 			}
 
 			_isShooting = false;

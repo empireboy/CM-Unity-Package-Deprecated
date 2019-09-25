@@ -8,6 +8,7 @@ public class ShootController : MonoBehaviour
 	private bool _isExecuting = false;
 
 	private float _timer = 0f;
+	private int _burstCounter = 0;
 
 	public delegate void ShootHandler();
 	public event ShootHandler ShootEvent;
@@ -32,11 +33,34 @@ public class ShootController : MonoBehaviour
 		}
 		else
 		{
-			// Shoot
-			if (ShootEvent != null)
-				ShootEvent.Invoke();
+			// Increase Burst Fire Counter
+			if (_shootingType.burstFire)
+			{
+				_burstCounter++;
+				_timer = 1 / _shootingType.fireRate;
+			}
 
-			StopChecking();
+			// Finished Burst Fire and Time Between Burst
+			if (_burstCounter >= _shootingType.shotsPerBurst + 1 || _shootingType.timeBetweenBurst <= 0)
+			{
+				StopChecking();
+				return;
+			}
+
+			// Finished Burst Fire
+			if (_burstCounter >= _shootingType.shotsPerBurst)
+			{
+				_timer = _shootingType.timeBetweenBurst;
+			}
+
+			// Shoot
+			ShootEvent?.Invoke();
+
+			// Finished Normal Fire
+			if (!_shootingType.burstFire)
+			{
+				StopChecking();
+			}
 		}
 	}
 
