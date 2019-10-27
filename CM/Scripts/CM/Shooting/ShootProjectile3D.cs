@@ -26,5 +26,12 @@ namespace CM.Shooting
 				projectileRigidbody.AddForce(projectile.transform.forward * force);
 			}
 		}
+
+		public void Shoot(float force, float spray, float damage)
+		{
+			CM_Debug.Log("CM Shooting", "Use " + this + ".Shoot(projectile, force, spray) instead of " + this + ".Shoot(force, spray, damage). The " + this + " class requires a (GameObject)projectile.");
+
+			return;
+		}
 	}
 }

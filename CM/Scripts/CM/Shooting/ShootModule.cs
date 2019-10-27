@@ -57,14 +57,21 @@ namespace CM.Shooting
 		private void OnShootChecked()
 		{
 			// Shoot the projectile if it exists
-			for (int i = 0; i < _shootingType.projectilesPerShot; i++)
+			if (_shootingType.projectilePrefab)
 			{
-				GameObject projectile = _bulletPool.GetObject();
-
-				if (projectile)
+				for (int i = 0; i < _shootingType.projectilesPerShot; i++)
 				{
-					_shootProjectileModule.Shoot(projectile, _shootingType.shootForce, _shootingType.spray);
+					GameObject projectile = _bulletPool.GetObject();
+
+					if (projectile)
+					{
+						_shootProjectileModule.Shoot(projectile, _shootingType.shootForce, _shootingType.spray);
+					}
 				}
+			}
+			else
+			{
+				_shootProjectileModule.Shoot(_shootingType.shootForce, _shootingType.spray, _shootingType.nullProjectileDamage);
 			}
 
 			// Instantiate Muzzle

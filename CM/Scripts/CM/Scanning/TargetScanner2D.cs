@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace CM.Scanner
 {
-	public class TargetScanner : MonoBehaviour, ITargetScanner
+	public class TargetScanner2D : MonoBehaviour, ITargetScanner
 	{
 		[SerializeField]
 		private float _range = 3f;
@@ -13,6 +13,13 @@ namespace CM.Scanner
 
 		[SerializeField]
 		private LayerMask _targetMask;
+		public LayerMask TargetMask
+		{
+			get
+			{
+				return _targetMask;
+			}
+		}
 
 		[SerializeField]
 		private LayerMask _blockVisionMask;
@@ -22,7 +29,7 @@ namespace CM.Scanner
 
 		public GameObject GetTarget()
 		{
-			Collider2D[] hitColliders = Physics2D.OverlapCircleAll(_scannerTransform.position, _range, _targetMask);
+			Collider2D[] hitColliders = Physics2D.OverlapCircleAll(_scannerTransform.position, _range, TargetMask);
 
 			if (hitColliders.Length <= 0)
 				return null;
