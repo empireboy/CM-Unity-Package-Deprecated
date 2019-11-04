@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.Events;
 
 namespace CM.Shooting
 {
@@ -20,6 +21,8 @@ namespace CM.Shooting
 		private ObjectPool _bulletPool;
 
 		private ShootController _shootController;
+
+		public UnityEvent onShoot;
 
 		private void Awake()
 		{
@@ -80,6 +83,9 @@ namespace CM.Shooting
 				GameObject muzzle = Instantiate(_muzzle, _shootTransform);
 				Destroy(muzzle, 0.1f);
 			}
+
+			// Shoot event
+			onShoot.Invoke();
 
 			_isShooting = false;
 		}

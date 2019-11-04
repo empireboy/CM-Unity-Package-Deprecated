@@ -28,6 +28,13 @@ namespace CM.Shooting
 		[Tooltip("Time in seconds between every burst.")]
 		public float timeBetweenBurst = 1f;
 
+		[Header("Exponantially Increase Fire Rate")]
+
+		[Tooltip("Exponentially increase the fire rate every shot with this amount.")]
+		public float exponentiallyIncreaseFireRateValue = 1f;
+
+		public float exponentiallyIncreaseFireRateMinMax = 1f;
+
 		[Header("Prefabs")]
 
 		public GameObject projectilePrefab;
