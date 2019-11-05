@@ -2,6 +2,7 @@
 
 namespace CM.Shooting
 {
+	[System.Serializable]
 	[CreateAssetMenu(menuName = "CM/Shooting/ShootingType", order = 1)]
 	public class ShootingType : ScriptableObject
 	{
