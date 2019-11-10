@@ -18,11 +18,20 @@ namespace CM.Scanner
 		}
 
 		[SerializeField]
+		private LayerMask _blockVisionMask;
+
+		[SerializeField]
 		private Transform _scannerTransform;
 
 		public GameObject GetTarget()
 		{
+			if (Physics2D.Linecast(_scannerTransform.position, _scannerTransform.position + _scannerTransform.right, _blockVisionMask))
+				return null;
+
 			RaycastHit2D hit = Physics2D.Linecast(_scannerTransform.position, _scannerTransform.position + _scannerTransform.right * _range, _targetMask);
+
+			if (!hit)
+				return null;
 
 			return hit.transform.gameObject;
 		}
