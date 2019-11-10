@@ -33,7 +33,7 @@ namespace CM.Shooting
 
 		public void Shoot()
 		{
-			CM_Debug.Log("CM Shooting", "You can't call the Shoot method directly, use " + this + ".Trigger() instead");
+			CM_Debug.Log("CM.Shooting", "You can't call the Shoot method directly, use " + this + ".Trigger() instead");
 		}
 
 		public bool IsShooting()
