@@ -22,6 +22,36 @@ namespace CM
 			Debug.Log("[" + category + "] " + message);
 		}
 
+		public static void LogWarning(string category, object message)
+		{
+			// Add category if it doesn't exist
+			if (!CategoryExists(category))
+			{
+				categories.Add(category, false);
+			}
+
+			// Return if the current category is set to false
+			if (!categories[category])
+				return;
+
+			Debug.LogWarning("[" + category + "] " + message);
+		}
+
+		public static void LogError(string category, object message)
+		{
+			// Add category if it doesn't exist
+			if (!CategoryExists(category))
+			{
+				categories.Add(category, false);
+			}
+
+			// Return if the current category is set to false
+			if (!categories[category])
+				return;
+
+			Debug.LogError("[" + category + "] " + message);
+		}
+
 		public static void AddCategory(string category, bool value)
 		{
 			// Check if the category already exists
