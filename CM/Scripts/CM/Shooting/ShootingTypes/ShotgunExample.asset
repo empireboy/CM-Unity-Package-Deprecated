@@ -15,5 +15,10 @@ MonoBehaviour:
   shootForce: 0.8
   spray: 30
   projectilesPerShot: 7
-  projectilePrefab: {fileID: 1599256281345308, guid: 6cc6519baa6e7744aad4de2c59eea192,
-    type: 2}
+  burstFire: 0
+  shotsPerBurst: 3
+  timeBetweenBurst: 1
+  exponentiallyIncreaseFireRateValue: 1
+  exponentiallyIncreaseFireRateMinMax: 1
+  projectilePrefab: {fileID: 0}
+  nullProjectileDamage: 0
