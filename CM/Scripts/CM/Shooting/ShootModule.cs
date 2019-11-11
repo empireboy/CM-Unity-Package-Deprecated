@@ -28,16 +28,10 @@ namespace CM.Shooting
 		{
 			_shootProjectileModule = GetComponent<IShootProjectile>();
 
-			ObjectPool[] objectPools = FindObjectsOfType<ObjectPool>();
+			if (!_shootingType.projectilePrefab)
+				return;
 
-			foreach (ObjectPool objectPool in objectPools)
-			{
-				if (objectPool._P_PrefabGameObject == _shootingType.projectilePrefab)
-				{
-					_bulletPool = objectPool;
-					break;
-				}
-			}
+			_bulletPool = FindBulletPool();
 		}
 
 		public void Shoot()
@@ -68,11 +62,17 @@ namespace CM.Shooting
 
 					if (projectile)
 					{
+						if (_shootProjectileModule == null)
+						{
+							CM_Debug.LogError("CM.Shooting", "There is a Bullet attached to " + this + ", but there is no script attached to shoot it.");
+							return;
+						}
+
 						_shootProjectileModule.Shoot(projectile, _shootingType.shootForce, _shootingType.spray);
 					}
 				}
 			}
-			else
+			else if (_shootProjectileModule != null)
 			{
 				_shootProjectileModule.Shoot(_shootingType.shootForce, _shootingType.spray, _shootingType.nullProjectileDamage);
 			}
@@ -88,6 +88,24 @@ namespace CM.Shooting
 			onShoot.Invoke();
 
 			_isShooting = false;
+		}
+
+		public ObjectPool FindBulletPool()
+		{
+			ObjectPool[] objectPools = FindObjectsOfType<ObjectPool>();
+
+			// Look for the bullet pool
+			foreach (ObjectPool objectPool in objectPools)
+			{
+				if (objectPool._P_PrefabGameObject == _shootingType.projectilePrefab)
+				{
+					return objectPool;
+				}
+			}
+
+			Debug.LogError("Could not find the Bullet Pool from the " + _shootingType.projectilePrefab + " prefab.");
+
+			return null;
 		}
 
 		public bool IsShooting()
