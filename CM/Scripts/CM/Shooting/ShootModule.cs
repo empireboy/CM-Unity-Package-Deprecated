@@ -14,6 +14,9 @@ namespace CM.Shooting
 		[SerializeField]
 		private GameObject _muzzle;
 
+		[SerializeField]
+		private float _muzzleLifetime = 0.1f;
+
 		private IShootProjectile _shootProjectileModule;
 
 		private bool _isShooting = false;
@@ -81,7 +84,7 @@ namespace CM.Shooting
 			if (_muzzle)
 			{
 				GameObject muzzle = Instantiate(_muzzle, _shootTransform);
-				Destroy(muzzle, 0.1f);
+				Destroy(muzzle, _muzzleLifetime);
 			}
 
 			// Shoot event
