@@ -49,8 +49,8 @@ namespace CM.Essentials
 
 		protected virtual void OnAwake()
 		{
-			if (!CM_Debug.CategoryExists("CM Entity"))
-				CM_Debug.AddCategory("CM Entity", false);
+			if (!CM_Debug.CategoryExists("CM", "CM.Entity"))
+				CM_Debug.AddCategory(false, "CM", "CM.Entity");
 
 			// Create Module Parent
 			if (!GetModuleObject())
@@ -72,7 +72,7 @@ namespace CM.Essentials
 
 		public void InitializeModules()
 		{
-			CM_Debug.Log("CM Entity", "Initializing Modules");
+			CM_Debug.Log("Initializing Modules", "CM", "CM.Entity");
 			_moduleInterfaces = this.GetType().GetInterfaces();
 		}
 
@@ -97,7 +97,7 @@ namespace CM.Essentials
 
 		public T[] GetModules<T>(bool includeInactive)
 		{
-			CM_Debug.Log("CM Entity", "Getting Modules of " + typeof(T).ToString());
+			CM_Debug.Log("Getting Modules of " + typeof(T).ToString(), "CM", "CM.Entity");
 
 			GameObject moduleObject = GetModuleObject();
 
@@ -137,7 +137,7 @@ namespace CM.Essentials
 
 		public Component[] GetModules(Type moduleInterface, bool includeInactive)
 		{
-			CM_Debug.Log("CM Entity", "Getting Modules of " + moduleInterface.ToString());
+			CM_Debug.Log("Getting Modules of " + moduleInterface.ToString(), "CM", "CM.Entity");
 
 			GameObject moduleObject = GetModuleObject();
 

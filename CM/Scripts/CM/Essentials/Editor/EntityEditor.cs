@@ -91,7 +91,7 @@ public class EntityEditor : Editor
 		// Open all foldouts
 		if (GUILayout.Button("Open All"))
 		{
-			CM_Debug.Log("CM Entity", "Opening all foldouts");
+			CM_Debug.Log("Opening all foldouts", "CM", "CM.Entity");
 
 			for (int i = 0; i < _moduleFoldouts.Length; i++)
 				_moduleFoldouts[i] = true;
@@ -100,7 +100,7 @@ public class EntityEditor : Editor
 		// Close all foldouts
 		if (GUILayout.Button("Close All"))
 		{
-			CM_Debug.Log("CM Entity", "Closing all foldouts");
+			CM_Debug.Log("Closing all foldouts", "CM", "CM.Entity");
 
 			for (int i = 0; i < _moduleFoldouts.Length; i++)
 				_moduleFoldouts[i] = false;
@@ -109,7 +109,7 @@ public class EntityEditor : Editor
 		// Activate all Modules
 		if (GUILayout.Button("Activate All"))
 		{
-			CM_Debug.Log("CM Entity", "Activating all Modules");
+			CM_Debug.Log("Activating all Modules", "CM", "CM.Entity");
 
 			Transform[] childs = entity.GetModuleObject().GetComponentsInChildren<Transform>(true);
 

@@ -16,31 +16,46 @@ namespace CM
 
 		private void OnGUI()
 		{
-			GUILayout.Label("Categories", EditorStyles.boldLabel);
+			GUILayout.Label("CM Debug", EditorStyles.boldLabel);
 
 			EditorGUILayout.Space();
 
-			// Generate categories
+			// Initialize categories
+			if (CM_Debug.mainCategory == null)
+				return;
 
-			// Copy categories from CM_Debug.categories
-			Dictionary<string, bool> categories = new Dictionary<string, bool>();
-			categories = CM_Debug.categories;
-			List<string> keys = new List<string>(categories.Keys);
+			// Copy categories from CM_Debug.mainCategory
+			List<string> categoryKeys = new List<string>(CM_Debug.mainCategory.InnerCategory.Keys);
 
 			// Draw a checkbox for every category
-			foreach (var key in keys)
+			foreach (string key in categoryKeys)
 			{
-				categories[key] = EditorGUILayout.Toggle(key, categories[key]);
+				bool toggle = EditorGUILayout.BeginToggleGroup(key, CM_Debug.mainCategory.InnerCategory[key].Active);
+
+				if (toggle != CM_Debug.mainCategory.InnerCategory[key].Active)
+					CM_Debug.mainCategory.InnerCategory[key].Active = toggle;
+
+				List<string> innerCategoryKeys = new List<string>(CM_Debug.mainCategory.InnerCategory[key].InnerCategory.Keys);
+
+				// Draw a checkbox for every inner category
+				foreach (var innerKey in innerCategoryKeys)
+				{
+					CM_Debug.mainCategory.InnerCategory[key].InnerCategory[innerKey].Active = EditorGUILayout.Toggle(
+						innerKey, CM_Debug.mainCategory.InnerCategory[key].InnerCategory[innerKey].Active
+					);
+				}
+
+				EditorGUILayout.EndToggleGroup();
 			}
 
 			// Warning messages
-			if (CM_Debug.categories.Count == 0)
+			if (CM_Debug.mainCategory.InnerCategory.Count == 0)
 			{
 				GUILayout.Label("No categories could be found.", EditorStyles.helpBox);
 				EditorGUILayout.Space();
 			}
 
-			if (CM_Debug.categories.Count > 0)
+			if (CM_Debug.mainCategory.InnerCategory.Count > 0)
 			{
 				EditorGUILayout.Space();
 			}

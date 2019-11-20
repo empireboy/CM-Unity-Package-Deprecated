@@ -7,17 +7,22 @@ namespace CM.Essentials
 	{
 		protected List<T> interfaces = new List<T>();
 
-		private void Start()
+		private void Awake()
 		{
-			if (!CM_Debug.CategoryExists("CM.Essentials.Manager"))
-				CM_Debug.AddCategory("CM.Essentials.Manager", false);
+			OnAwake();
+		}
+
+		protected virtual void OnAwake()
+		{
+			if (!CM_Debug.CategoryExists("CM", "CM.Essentials.Manager"))
+				CM_Debug.AddCategory(false, "CM", "CM.Essentials.Manager");
 		}
 
 		public void AddInterface(T newInterface)
 		{
 			interfaces.Add(newInterface);
 
-			CM_Debug.Log("CM.Essentials.Manager", "Added an interface of type " + typeof(T) + " to " + this + ". This Manager now has a total of " + interfaces.Count + " interfaces");
+			CM_Debug.Log("CM", "CM.Essentials.Manager", "Added an interface of type " + typeof(T) + " to " + this + ". This Manager now has a total of " + interfaces.Count + " interfaces");
 		}
 	}
 }
