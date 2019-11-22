@@ -7,6 +7,7 @@ namespace CM.Shooting
 	{
 		[SerializeField]
 		private ShootingType _shootingType;
+		public ShootingType ShootingType => _shootingType;
 
 		[SerializeField]
 		private Transform _shootTransform;
