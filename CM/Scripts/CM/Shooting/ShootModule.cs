@@ -18,6 +18,9 @@ namespace CM.Shooting
 		[SerializeField]
 		private float _muzzleLifetime = 0.1f;
 
+		[SerializeField]
+		private float _damage;
+
 		private IShootProjectile _shootProjectileModule;
 
 		private bool _isShooting = false;
@@ -115,6 +118,21 @@ namespace CM.Shooting
 		public bool IsShooting()
 		{
 			return _isShooting;
+		}
+
+		public void SetDamage(float damage)
+		{
+			_damage = damage;
+		}
+
+		public void SetMuzzle(GameObject muzzle)
+		{
+			_muzzle = muzzle;
+		}
+
+		public void SetShootingType(ShootingType shootingType)
+		{
+			_shootingType = shootingType;
 		}
 	}
 }
