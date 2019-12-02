@@ -48,5 +48,10 @@ namespace CM.Orientation
 		{
 			return lookingTransform.position;
 		}
+
+		public void SetRotationSpeed(float rotationSpeed)
+		{
+			this.rotationSpeed = rotationSpeed;
+		}
 	}
 }
