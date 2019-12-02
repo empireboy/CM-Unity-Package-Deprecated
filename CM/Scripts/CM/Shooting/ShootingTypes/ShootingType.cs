@@ -35,14 +35,5 @@ namespace CM.Shooting
 		public float exponentiallyIncreaseFireRateValue = 1f;
 
 		public float exponentiallyIncreaseFireRateMinMax = 1f;
-
-		[Header("Prefabs")]
-
-		public GameObject projectilePrefab;
-
-		[Header("Misc Properties")]
-
-		[Tooltip("The amount of damage to apply when using a null projectile prefab.")]
-		public float nullProjectileDamage = 0f;
 	}
 }
