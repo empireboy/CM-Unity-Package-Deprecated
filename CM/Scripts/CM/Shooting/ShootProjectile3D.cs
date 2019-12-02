@@ -7,7 +7,7 @@ namespace CM.Shooting
 		[SerializeField]
 		private Transform _shootTransform;
 
-		public void Shoot(GameObject projectile, float force, float spray)
+		public void Shoot(GameObject projectile, float force, float spray, float damage)
 		{
 			projectile.transform.position = _shootTransform.position;
 			projectile.transform.rotation = _shootTransform.rotation;
