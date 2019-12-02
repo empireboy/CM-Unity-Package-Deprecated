@@ -21,6 +21,9 @@ namespace CM.Shooting
 		[SerializeField]
 		private float _damage;
 
+		[SerializeField]
+		private GameObject _projectile;
+
 		private IShootProjectile _shootProjectileModule;
 
 		private bool _isShooting = false;
@@ -35,7 +38,7 @@ namespace CM.Shooting
 		{
 			_shootProjectileModule = GetComponent<IShootProjectile>();
 
-			if (!_shootingType.projectilePrefab)
+			if (!_projectile)
 				return;
 
 			_bulletPool = FindBulletPool();
@@ -61,7 +64,7 @@ namespace CM.Shooting
 		private void OnShootChecked()
 		{
 			// Shoot the projectile if it exists
-			if (_shootingType.projectilePrefab)
+			if (_projectile)
 			{
 				for (int i = 0; i < _shootingType.projectilesPerShot; i++)
 				{
@@ -75,13 +78,13 @@ namespace CM.Shooting
 							return;
 						}
 
-						_shootProjectileModule.Shoot(projectile, _shootingType.shootForce, _shootingType.spray);
+						_shootProjectileModule.Shoot(projectile, _shootingType.shootForce, _shootingType.spray, _damage);
 					}
 				}
 			}
 			else if (_shootProjectileModule != null)
 			{
-				_shootProjectileModule.Shoot(_shootingType.shootForce, _shootingType.spray, _shootingType.nullProjectileDamage);
+				_shootProjectileModule.Shoot(null, _shootingType.shootForce, _shootingType.spray, _damage);
 			}
 
 			// Instantiate Muzzle
@@ -104,13 +107,13 @@ namespace CM.Shooting
 			// Look for the bullet pool
 			foreach (ObjectPool objectPool in objectPools)
 			{
-				if (objectPool._P_PrefabGameObject == _shootingType.projectilePrefab)
+				if (objectPool._P_PrefabGameObject == _projectile)
 				{
 					return objectPool;
 				}
 			}
 
-			Debug.LogError("Could not find the Bullet Pool from the " + _shootingType.projectilePrefab + " prefab.");
+			Debug.LogError("Could not find the Bullet Pool from the " + _projectile + " prefab.");
 
 			return null;
 		}
@@ -133,6 +136,11 @@ namespace CM.Shooting
 		public void SetShootingType(ShootingType shootingType)
 		{
 			_shootingType = shootingType;
+		}
+
+		public void SetProjectile(GameObject projectile)
+		{
+			_projectile = projectile;
 		}
 	}
 }
