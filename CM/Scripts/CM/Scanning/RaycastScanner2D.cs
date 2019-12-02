@@ -36,6 +36,11 @@ namespace CM.Scanner
 			return hit.transform.gameObject;
 		}
 
+		public void SetRange(float range)
+		{
+			_range = range;
+		}
+
 		private void OnDrawGizmosSelected()
 		{
 			Gizmos.color = Color.yellow;

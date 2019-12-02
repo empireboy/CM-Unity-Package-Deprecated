@@ -73,6 +73,11 @@ namespace CM.Scanner
 			return bestTarget;
 		}
 
+		public void SetRange(float range)
+		{
+			_range = range;
+		}
+
 		private void OnDrawGizmosSelected()
 		{
 			if (_scannerTransform && _range > 0f)
