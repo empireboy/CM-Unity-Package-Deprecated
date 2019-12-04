@@ -42,13 +42,13 @@ public class EntityEditor : Editor
 		// Display a Label with: "Modules Found (modulesFoundNumber)"
 		GUILayout.Label("Modules Found " + "(" + modules.Count + ")", EditorStyles.boldLabel);
 
-		if (_moduleFoldouts.Length != modules.Count)
-		{
-			_moduleFoldouts = new bool[modules.Count];
-		}
-
 		for (int i = 0; i < modules.Count; i++)
 		{
+			if (_moduleFoldouts.Length != modules.Count)
+			{
+				_moduleFoldouts = new bool[modules.Count];
+			}
+
 			Editor tmpEditor = CreateEditor(modules[i]);
 
 			EditorGUILayout.BeginVertical("Box");
@@ -111,12 +111,15 @@ public class EntityEditor : Editor
 		{
 			CM_Debug.Log("Activating all Modules", "CM", "CM.Entity");
 
-			Transform[] childs = entity.GetModuleObject().GetComponentsInChildren<Transform>(true);
+			entity.ActivateAllModules();
+		}
 
-			for (int i = 0; i < childs.Length; i++)
-			{
-				childs[i].gameObject.SetActive(true);
-			}
+		// Deactivate all Modules
+		if (GUILayout.Button("Deactivate All"))
+		{
+			CM_Debug.Log("Deactivating all Modules", "CM", "CM.Entity");
+
+			entity.DeactivateAllModules();
 		}
 
 		EditorGUILayout.EndHorizontal();

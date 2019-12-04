@@ -78,7 +78,7 @@ namespace CM.Essentials
 
 		public GameObject GetModuleObject()
 		{
-			Transform[] children = gameObject.GetComponentsInChildren<Transform>();
+			Transform[] children = gameObject.GetComponentsInChildren<Transform>(true);
 			foreach (Transform child in children)
 			{
 				if (child.name == _moduleParentName)
@@ -168,6 +168,26 @@ namespace CM.Essentials
 			Component[] modules = modulesList.ToArray();
 
 			return modules;
+		}
+
+		public void ActivateAllModules()
+		{
+			Transform[] childs = GetModuleObject().GetComponentsInChildren<Transform>(true);
+
+			for (int i = 0; i < childs.Length; i++)
+			{
+				childs[i].gameObject.SetActive(true);
+			}
+		}
+
+		public void DeactivateAllModules()
+		{
+			Transform[] childs = GetModuleObject().GetComponentsInChildren<Transform>(true);
+
+			for (int i = 0; i < childs.Length; i++)
+			{
+				childs[i].gameObject.SetActive(false);
+			}
 		}
 	}
 }
