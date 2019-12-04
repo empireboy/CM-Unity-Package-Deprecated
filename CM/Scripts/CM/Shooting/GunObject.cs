@@ -11,8 +11,8 @@ namespace CM.Shooting
 		{
 			base.OnAwake();
 
-			_gunTriggerModules = GetModules<IGunTrigger>();
-			_shootModules = GetModules<IShoot>();
+			_gunTriggerModules = GetModules<IGunTrigger>(true);
+			_shootModules = GetModules<IShoot>(true);
 		}
 
 		public void SetTriggerState(GunTriggerState state)

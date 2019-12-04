@@ -35,10 +35,9 @@ namespace CM.Shooting
 					return;
 				case GunTriggerState.None:
 					triggerPulledEvent.Invoke();
+					_shootModule.Shoot();
 					break;
 			}
-
-			_shootModule.Shoot();
 		}
 	}
 }
