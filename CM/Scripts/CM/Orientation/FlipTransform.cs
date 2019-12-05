@@ -32,6 +32,9 @@ namespace CM.Orientation
 
 		public void Flip(bool flip)
 		{
+			if (!gameObject.activeInHierarchy)
+				return;
+
 			_isFlipped = flip;
 
 			if (!_isFlipping)
