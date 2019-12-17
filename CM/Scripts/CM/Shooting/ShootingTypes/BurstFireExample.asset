@@ -20,5 +20,3 @@ MonoBehaviour:
   timeBetweenBurst: 1
   exponentiallyIncreaseFireRateValue: 1
   exponentiallyIncreaseFireRateMinMax: 1
-  projectilePrefab: {fileID: 0}
-  nullProjectileDamage: 0
