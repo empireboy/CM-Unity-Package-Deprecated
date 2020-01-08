@@ -25,12 +25,14 @@ namespace CM.Scanner
 
 		public GameObject GetTarget()
 		{
-			if (Physics2D.Linecast(_scannerTransform.position, _scannerTransform.position + _scannerTransform.right, _blockVisionMask))
-				return null;
-
-			RaycastHit2D hit = Physics2D.Linecast(_scannerTransform.position, _scannerTransform.position + _scannerTransform.right * _range, _targetMask);
+			RaycastHit2D hit = Physics2D.Raycast(_scannerTransform.position, _scannerTransform.right, _range, _targetMask);
 
 			if (!hit)
+				return null;
+
+			RaycastHit2D wallHit = Physics2D.Raycast(_scannerTransform.position, _scannerTransform.right, _range, _blockVisionMask);
+
+			if (hit.distance >= wallHit.distance)
 				return null;
 
 			return hit.transform.gameObject;
