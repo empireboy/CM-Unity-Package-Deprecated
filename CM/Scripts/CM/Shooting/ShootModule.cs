@@ -27,6 +27,7 @@ namespace CM.Shooting
 		private IShootProjectile _shootProjectileModule;
 
 		private bool _isShooting = false;
+		private bool _canShoot = true;
 
 		private ObjectPool _bulletPool;
 
@@ -59,9 +60,14 @@ namespace CM.Shooting
 			_shootController.ShootEvent += OnShootChecked;
 
 			_isShooting = true;
+
+			if (_canShoot)
+				SpawnProjectile();
+
+			_canShoot = false;
 		}
 
-		private void OnShootChecked()
+		private void SpawnProjectile()
 		{
 			// Shoot the projectile if it exists
 			if (_projectile)
@@ -98,6 +104,11 @@ namespace CM.Shooting
 			onShoot.Invoke();
 
 			_isShooting = false;
+		}
+
+		private void OnShootChecked()
+		{
+			_canShoot = true;
 		}
 
 		public ObjectPool FindBulletPool()
