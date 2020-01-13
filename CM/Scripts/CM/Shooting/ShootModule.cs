@@ -47,6 +47,9 @@ namespace CM.Shooting
 
 		public void Shoot()
 		{
+			if (!gameObject.activeInHierarchy)
+				return;
+
 			if (_shootController)
 				return;
 
