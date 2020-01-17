@@ -29,7 +29,7 @@ namespace CM.Shooting
 		private bool _isShooting = false;
 		private bool _canShoot = true;
 
-		private ObjectPool _bulletPool;
+		private ObjectPoolHandler _bulletPool;
 
 		private ShootController _shootController;
 
@@ -77,7 +77,7 @@ namespace CM.Shooting
 			{
 				for (int i = 0; i < _shootingType.projectilesPerShot; i++)
 				{
-					GameObject projectile = _bulletPool.GetObject();
+					GameObject projectile = _bulletPool.GetObject(_projectile);
 
 					if (projectile)
 					{
@@ -114,18 +114,12 @@ namespace CM.Shooting
 			_canShoot = true;
 		}
 
-		public ObjectPool FindBulletPool()
+		public ObjectPoolHandler FindBulletPool()
 		{
-			ObjectPool[] objectPools = FindObjectsOfType<ObjectPool>();
+			ObjectPoolHandler objectPoolHandler = FindObjectOfType<ObjectPoolHandler>();
 
-			// Look for the bullet pool
-			foreach (ObjectPool objectPool in objectPools)
-			{
-				if (objectPool._P_PrefabGameObject == _projectile)
-				{
-					return objectPool;
-				}
-			}
+			if (objectPoolHandler)
+				return objectPoolHandler;
 
 			Debug.LogError("Could not find the Bullet Pool from the " + _projectile + " prefab.");
 
