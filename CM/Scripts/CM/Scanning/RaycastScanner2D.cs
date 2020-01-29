@@ -32,8 +32,11 @@ namespace CM.Scanner
 
 			RaycastHit2D wallHit = Physics2D.Raycast(_scannerTransform.position, _scannerTransform.right, _range, _blockVisionMask);
 
-			if (hit.distance >= wallHit.distance)
-				return null;
+			if (wallHit)
+			{
+				if (hit.distance >= wallHit.distance)
+					return null;
+			}
 
 			return hit.transform.gameObject;
 		}
